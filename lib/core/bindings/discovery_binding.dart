@@ -4,13 +4,14 @@ import 'package:get/get.dart';
 
 import '../../domain/repositories/team/list_apply_user_repository.dart';
 import '../../domain/repositories/team/update_member_team_repository.dart';
+import '../../domain/repositories/user/user_detail_repository.dart';
 
 class DiscoveryBinding extends Bindings {
   @override
   void dependencies() {
     Get
-
+      ..put<UserDetailRepository>(UserDetailRepositoryImpl(Get.find()))
       ..put<UserApplyRepository>(UserApplyRepositoryImpl(Get.find()))
-      ..put<DiscoveryController>(DiscoveryController(Get.find()));
+      ..put<DiscoveryController>(DiscoveryController(Get.find(),Get.find()));
   }
 }

@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 
 import '../../../core/styles/app_colors.dart';
 import '../../../core/styles/app_text_style.dart';
+import '../../../domain/serviceable/auth_serviceable.dart';
 import '../../../shared/widget/scroll_view/single_chill_scroll_load_more_widget.dart';
 
 class ApplicationScreen extends StatefulWidget {
@@ -19,9 +20,10 @@ class ApplicationScreen extends StatefulWidget {
 }
 
 class _ApplicationScreenState extends State<ApplicationScreen> {
+  final authStoreService = AuthStore.to;
   void _onRefresh() async {
     applicationController.fetchListApplyPending(
-        teamId: '4b322ca8-0d2b-457f-a6c7-01cbeade1cf2', status: 'PENDING');
+        teamId: authStoreService.idTeam, status: 'PENDING');
   }
 
   TeamDetailController applicationController = TeamDetailController.to;

@@ -12,7 +12,7 @@ class TeamAllRemoteDataSourceImpl extends TeamAllRemoteDataSource {
 
   @override
   Future<List<TeamByUserDTO>> getTeamAll() async {
-    final url = "http://192.168.4.156:8080/api/teams";
+    final url = "https://soccermatch-production.up.railway.app/api/teams";
 
     final response =
     await _apiClient.get(url);

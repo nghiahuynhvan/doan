@@ -38,6 +38,7 @@ class AppColors {
   static Color btGrey900 = const Color(0xFF263238);
   static Color btGrey800 = const Color(0xFF37474F);
   static Color bgRed = const Color(0xFFFF0000);
+  static Color bgF9F9F9 = const Color(0xFFF9F9F9);
 
 
 

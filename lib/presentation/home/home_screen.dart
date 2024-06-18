@@ -30,6 +30,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   HomeController homeController = HomeController.to;
 
+  void _onRefresh() async {
+   homeController.getAllMatchesCriteria();
+  }
+
   @override
   Widget build(BuildContext context) {
     return AppBgBodyView(
@@ -199,6 +203,9 @@ class _HomePageState extends State<HomePage> {
                       homeController.itemMatchesCriteria.value != null
                           ? Expanded(
                               child: SingleChildScrollLoadView(
+                                onRefresh: () async {
+                                  _onRefresh();
+                                },
                                 child: ListView.builder(
                                   shrinkWrap: true,
                                   padding: EdgeInsets.zero,
@@ -242,22 +249,35 @@ class _HomePageState extends State<HomePage> {
                                                   child: SizedBox(
                                                     width: 80,
                                                     height: 80,
-                                                    child:itemTeamMatchCriteria
-                                                        .team!.urlImage != null? Image.network(
-                                                      itemTeamMatchCriteria
-                                                          .team!.urlImage!,
-                                                      fit: BoxFit.cover,
-                                                    ) : Container(
-                                                      height: 40.h,
-                                                      width: 40.h,
-                                                      margin: const EdgeInsets.symmetric(
-                                                          vertical: 16, horizontal: 12),
-                                                      child: const CircleAvatar(
-                                                        radius: 40,
-                                                        backgroundImage: AssetImage(
-                                                            AppImages.userEmpty),
-                                                      ),
-                                                    ),
+                                                    child: itemTeamMatchCriteria
+                                                                .team!
+                                                                .urlImage !=
+                                                            null
+                                                        ? Image.network(
+                                                            itemTeamMatchCriteria
+                                                                .team!
+                                                                .urlImage!,
+                                                            fit: BoxFit.cover,
+                                                          )
+                                                        : Container(
+                                                            height: 40.h,
+                                                            width: 40.h,
+                                                            margin:
+                                                                const EdgeInsets
+                                                                    .symmetric(
+                                                                    vertical:
+                                                                        16,
+                                                                    horizontal:
+                                                                        12),
+                                                            child:
+                                                                const CircleAvatar(
+                                                              radius: 40,
+                                                              backgroundImage:
+                                                                  AssetImage(
+                                                                      AppImages
+                                                                          .userEmpty),
+                                                            ),
+                                                          ),
                                                   ),
                                                 ),
                                               ),
@@ -332,7 +352,7 @@ class _HomePageState extends State<HomePage> {
                       Row(children: [
                         Expanded(
                           child: Container(
-                            height: 50,
+                            height: 50.h,
                             child: ElevatedButton(
                               onPressed: () {
                                 Get.to(FormMatchesCriteria());

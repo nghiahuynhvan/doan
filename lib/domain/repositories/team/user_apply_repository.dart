@@ -27,7 +27,7 @@ class UserApplyRepositoryImpl extends UserApplyRepository {
   @override
   Future<Either<AppError, dynamic>> createUser(MemberData data) async {
     try {
-      final url = "http://192.168.4.156:8080/api/team-members";
+      final url = "https://soccermatch-production.up.railway.app/api/team-members";
       final response = await _apiClient.post(url, body: data.toJson());
       return response;
     } on DioError catch (e) {

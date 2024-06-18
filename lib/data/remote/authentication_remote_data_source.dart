@@ -19,7 +19,7 @@ class AuthenticationRemoteDataSourceImpl
 
   @override
   Future<UserInfoDTO> login(String email, String password) async {
-    final url = "${"http://192.168.4.156:8080/api/auth/basic/login"}";
+    final url = "${"https://soccermatch-production.up.railway.app/api/auth/basic/login"}";
     final queryParameters = {
       "username": email,
       "password": password

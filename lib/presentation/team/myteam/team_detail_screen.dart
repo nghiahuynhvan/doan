@@ -255,6 +255,146 @@ class _TeamDetailState extends State<TeamDetail> {
                         ),
                       ),
                     ),
+                    Container(
+                      height: 32.h,
+                      width: 120.w,
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 16),
+                      child:  GestureDetector(
+                        child: Container(
+                          width: 100.w,
+                          height: 30.h,
+                          decoration: BoxDecoration(
+                            color: AppColors.bgWhiteLow1,
+                            borderRadius: BorderRadius.circular(8),
+                            border:
+                            Border.all(color: AppColors.bgwhiteLow2),
+                          ),
+                          child: Row(
+                            mainAxisAlignment:
+                            MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Icon(Icons.settings,color: Colors.white,),
+                              Container(
+                                margin: const EdgeInsets.symmetric(
+                                    horizontal: 8),
+                                child: Text(
+                                  'Tùy chỉnh',
+                                  style: AppTextStyles.regular16
+                                      .copyWith(color: AppColors.bgWhite),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      height: 32.h,
+                      width: 120.w,
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 16),
+                      child:  GestureDetector(
+                        child: Container(
+                          width: 100.w,
+                          height: 30.h,
+                          decoration: BoxDecoration(
+                            color: AppColors.bgWhiteLow1,
+                            borderRadius: BorderRadius.circular(8),
+                            border:
+                            Border.all(color: AppColors.bgwhiteLow2),
+                          ),
+                          child: Row(
+                            mainAxisAlignment:
+                            MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Icon(Icons.settings,color: Colors.white,),
+                              Container(
+                                margin: const EdgeInsets.symmetric(
+                                    horizontal: 8),
+                                child: Text(
+                                  'Tùy chỉnh',
+                                  style: AppTextStyles.regular16
+                                      .copyWith(color: AppColors.bgWhite),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      height: 32.h,
+                      width: 120.w,
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 16),
+                      child:  GestureDetector(
+                        onTap: () {
+                          teamDetailController.updateStatusTeam("APPLY",itemDetail.id!);
+                        },
+                        child: Container(
+                          width: 140.w,
+                          height: 30.h,
+                          decoration: BoxDecoration(
+                            color: AppColors.bgWhiteLow1,
+                            borderRadius: BorderRadius.circular(8),
+                            border:
+                            Border.all(color: AppColors.bgwhiteLow2),
+                          ),
+                          child: Row(
+                            mainAxisAlignment:
+                            MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Container(
+                                margin: const EdgeInsets.symmetric(
+                                    horizontal: 8),
+                                child: Text(
+                                  'Mở ứng tuyển',
+                                  style: AppTextStyles.regular16
+                                      .copyWith(color: AppColors.bgWhite),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      height: 32.h,
+                      width: 120.w,
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 16),
+                      child:  GestureDetector(
+                        onTap: () {
+                          teamDetailController.updateStatusTeam("ACTIVE",itemDetail.id!);
+                        },
+                        child: Container(
+                          width: 140.w,
+                          height: 30.h,
+                          decoration: BoxDecoration(
+                            color: AppColors.bgWhiteLow1,
+                            borderRadius: BorderRadius.circular(8),
+                            border:
+                            Border.all(color: AppColors.bgwhiteLow2),
+                          ),
+                          child: Row(
+                            mainAxisAlignment:
+                            MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Container(
+                                margin: const EdgeInsets.symmetric(
+                                    horizontal: 8),
+                                child: Text(
+                                  'Đóng ứng tuyển',
+                                  style: AppTextStyles.regular16
+                                      .copyWith(color: AppColors.bgWhite),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               )

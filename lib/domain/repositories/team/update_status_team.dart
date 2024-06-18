@@ -11,22 +11,26 @@ import '../../models/team/member_team_model.dart';
 /// [AuthenticationRepository] class have different functions that are used to
 /// user authentication
 /// {@endtemplate}
-abstract class CreateTeamRepository extends Repository {
-  Future<Either<AppError, TeamByUserModel>> createTeam(TeamByUserModel data);
+abstract class UpdateStatusTeamRepository extends Repository {
+  Future<Either<AppError, dynamic>> updateStatusTeam(String active, String idTeam);
 }
 
 /// {@macro authentication_repository}
-class CreateTeamRepositoryImpl extends CreateTeamRepository {
-  CreateTeamRepositoryImpl(this._apiClient);
+class UpdateStatusTeamRepositoryImpl extends UpdateStatusTeamRepository {
+  UpdateStatusTeamRepositoryImpl(this._apiClient);
 
   late final CustomHttpClient _apiClient;
 
   @override
-  Future<Either<AppError, TeamByUserModel>> createTeam(TeamByUserModel data) async {
+  Future<Either<AppError, dynamic>> updateStatusTeam(String active,String idTeam) async {
     try {
+      final url = "https://soccermatch-production.up.railway.app/api/teams/update-status";
+      var body = {
+        "status": active,
+        "teamIds": [idTeam]
+      };
 
-      final url = "https://soccermatch-production.up.railway.app/api/teams";
-      final response = await _apiClient.post(url,body: data.toJson());
+      final response = await _apiClient.post(url, body: body);
       return response;
     } on DioError catch (e) {
       return LeftAPI(e);

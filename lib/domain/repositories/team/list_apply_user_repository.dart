@@ -16,6 +16,8 @@ abstract class ListApplyUserRepository extends Repository {
   /// {@endtemplate}
   Future<Either<AppError, List<MemberData>>> getUserPending(
       {required String teamId, required String status});
+
+  Future<Either<AppError, dynamic>> deleteMember(String id);
 }
 
 /// {@macro authentication_repository}
@@ -29,16 +31,28 @@ class ListApplyUserRepositoryImpl extends ListApplyUserRepository {
   Future<Either<AppError, List<MemberData>>> getUserPending(
       {required String teamId, required String status}) async {
     try {
-      final url = "http://192.168.4.156:8080/api/team-members/$teamId/all";
-      final queryParameters = {
-        "status": status
-      };
+      final url =
+          "https://soccermatch-production.up.railway.app/api/team-members/$teamId/all";
+      final queryParameters = {"status": status};
       final response =
-          await _apiClient.get(url,queryParameters:queryParameters);
+          await _apiClient.get(url, queryParameters: queryParameters);
       List<dynamic> data = response;
-      final result = data.map((e) => MemberData.fromJson(e )).toList();
+      final result = data.map((e) => MemberData.fromJson(e)).toList();
       print('@@@@@@@@@@@${result}');
       return Right(result);
+    } on DioError catch (e) {
+      return LeftAPI(e);
+    }
+  }
+
+  @override
+  Future<Either<AppError, dynamic>> deleteMember(String id) async {
+    try {
+      final url =
+          "https://soccermatch-production.up.railway.app/api/team-members/$id";
+      final response = await _apiClient.delete(url);
+      print('@@@@@@@@@@@${response}');
+      return response;
     } on DioError catch (e) {
       return LeftAPI(e);
     }

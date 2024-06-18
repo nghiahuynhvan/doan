@@ -17,6 +17,7 @@ abstract class UserDetailRepository extends Repository {
   /// API called when logging in
   /// {@endtemplate}
   Future<Either<AppError, UserModel>> getUserDetail({required String idUser});
+
 }
 
 /// {@macro authentication_repository}
@@ -29,7 +30,7 @@ class UserDetailRepositoryImpl extends UserDetailRepository {
   @override
   Future<Either<AppError, UserModel>> getUserDetail({required String idUser}) async {
     try {
-      final url = "http://192.168.4.156:8080/api/users/$idUser";
+      final url = "https://soccermatch-production.up.railway.app/api/users/$idUser";
       final response = await _apiClient.get(url);
       final result = UserDTO.fromJson(response);
       return Right(result.toDomain());

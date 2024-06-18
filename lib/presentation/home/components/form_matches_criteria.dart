@@ -6,6 +6,8 @@ import 'package:flutter_cupertino_datetime_picker/flutter_cupertino_datetime_pic
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:footballmanager/common/enum/e_status.dart';
 import 'package:footballmanager/common/enum/e_status_apply.dart';
+import 'package:footballmanager/domain/models/address/address_city_model.dart';
+import 'package:footballmanager/domain/models/address/district_model.dart';
 import 'package:footballmanager/domain/models/home/address_model.dart';
 import 'package:footballmanager/domain/models/home/matches_criteria_model.dart';
 import 'package:footballmanager/domain/models/team/team_by_user_model.dart';
@@ -34,6 +36,7 @@ class _FormMatchesCriteriaState extends State<FormMatchesCriteria> {
   final authStoreService = AuthStore.to;
   TextEditingController _descriptionController = TextEditingController();
   TextEditingController _timematchController = TextEditingController();
+  TextEditingController _textAddressController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -44,24 +47,41 @@ class _FormMatchesCriteriaState extends State<FormMatchesCriteria> {
       child: Scaffold(
         appBar: AppBar(
           foregroundColor: Colors.black,
-          title: Align(
-            alignment: Alignment.center,
-            child: Text(
-              'Tạo sảnh chờ cho trận đấu',
-              style: AppTextStyles.bold19.copyWith(color: AppColors.bgBlack),
-            ),
-          ),
           systemOverlayStyle: SystemUiOverlayStyle.light,
-          backgroundColor: AppColors.bgWhite,
+          backgroundColor: Colors.lightBlueAccent,
           elevation: 0,
         ),
         body: SafeArea(
           child: Container(
-            color: Colors.white,
+            color: AppColors.bgF9F9F9,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 50.h,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(16.0),
+                        bottomRight: Radius.circular(16.0),
+                      ),
+                      color: Colors.lightBlueAccent,
+                    ),
+                    child: Column(
+                      children: [
+                        Text(
+                          'Tạo trận đấu cho sảnh chờ',
+                          style: AppTextStyles.bold19
+                              .copyWith(color: Colors.black),
+                        ),
+                        Text(
+                          'Vui lòng nhập đầy đủ các thông tin yêu cầu',
+                          style: AppTextStyles.regular13
+                              .copyWith(color: Colors.black),
+                        )
+                      ],
+                    )),
                 Expanded(
                   child: SingleChildScrollView(
                     child: Container(
@@ -69,102 +89,148 @@ class _FormMatchesCriteriaState extends State<FormMatchesCriteria> {
                           EdgeInsets.symmetric(vertical: 16, horizontal: 16),
                       color: Colors.white,
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Obx(
                             () => Container(
-                              child: DropdownButtonFormField<String>(
-                                value: _selectedRole,
-                                onChanged: (String? newValue) {
-                                  setState(() {
-                                    _selectedRole = newValue;
-                                    homeController.index = itemTeamByUser.value!
-                                        .indexWhere(
-                                            (e) => e.name == _selectedRole)
-                                        .obs;
-                                    print('##${homeController.index}');
-                                  });
-                                },
-                                items: teamController.teamNames
-                                    .map<DropdownMenuItem<String>>(
-                                        (String role) {
-                                  return DropdownMenuItem<String>(
-                                    value: role,
-                                    child: Text(role),
-                                  );
-                                }).toList(),
-                                decoration: const InputDecoration(
-                                  labelText: 'Chọn đội bóng',
-                                  border: OutlineInputBorder(),
-                                ),
-                                dropdownColor: Colors.blue[50],
-                                iconEnabledColor: Colors.blue,
-                                iconDisabledColor: Colors.grey,
-                                style: TextStyle(
-                                  color: Colors.blue[800],
-                                  fontSize: 16,
-                                ),
+                              margin: EdgeInsets.symmetric(vertical: 8),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Chọn đội bóng',
+                                    style: AppTextStyles.bold18
+                                        .copyWith(color: Colors.black),
+                                  ),
+                                  DropdownButtonFormField<String>(
+                                    value: _selectedRole,
+                                    onChanged: (String? newValue) {
+                                      setState(() {
+                                        _selectedRole = newValue;
+                                        homeController.index = itemTeamByUser
+                                            .value!
+                                            .indexWhere(
+                                                (e) => e.name == _selectedRole)
+                                            .obs;
+                                        print('##${homeController.index}');
+                                      });
+                                    },
+                                    items: teamController.teamNames
+                                        .map<DropdownMenuItem<String>>(
+                                            (String role) {
+                                      return DropdownMenuItem<String>(
+                                        value: role,
+                                        child: Text(role),
+                                      );
+                                    }).toList(),
+                                    decoration: const InputDecoration(
+                                      labelText: '',
+                                      border: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Colors.black, // Màu viền
+                                          width: 1.0, // Độ rộng viền
+                                        ),
+                                      ),
+                                    ),
+                                    dropdownColor: Colors.blue[50],
+                                    iconEnabledColor: Colors.blue,
+                                    iconDisabledColor: Colors.black,
+                                    style: TextStyle(
+                                      color: Colors.blue[800],
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
-                          Text(
-                            'Thể loại sân',
-                            style: AppTextStyles.regular18
-                                .copyWith(color: Colors.black),
-                          ),
-                         Obx(()=>  GFMultiSelect(
-                           items: homeController.allCourtTypes.toList(),
-                           onSelect: (value) {
-                             homeController.A.clear();
-                             homeController.A.addAll([...value]);
-                           },
-                           dropdownTitleTileText: '',
-                           dropdownTitleTileMargin: const EdgeInsets.symmetric(
-                               vertical: 1, horizontal: 1),
-                           dropdownTitleTilePadding: const EdgeInsets.all(0),
-                           dropdownUnderlineBorder: const BorderSide(
-                               color: Colors.transparent, width: 2),
-                           dropdownTitleTileBorder:
-                           Border.all(color: Colors.grey, width: 1),
-                           dropdownTitleTileBorderRadius:
-                           BorderRadius.circular(5),
-                           expandedIcon: const Icon(
-                             Icons.keyboard_arrow_down,
-                             color: Colors.black54,
-                           ),
-                           collapsedIcon: const Icon(
-                             Icons.keyboard_arrow_up,
-                             color: Colors.black54,
-                           ),
-                           submitButton: GestureDetector(
-                             onTap: () {
-                               homeController.addAllCourtTypeByUser();
-                               print('###${homeController.allCourTypesPicker}');
-                             },
-                             child: const Text('OK'),
-                           ),
-                           dropdownTitleTileTextStyle: AppTextStyles.bold13,
-                           padding: const EdgeInsets.all(6),
-                           margin: const EdgeInsets.all(6),
-                           activeBgColor: Colors.green.withOpacity(0.5),
-                           inactiveBorderColor: Colors.grey,
-                         ),),
                           Container(
-                            child: Text(
-                              'Thời gian trận đấu',
-                              style: AppTextStyles.regular18
-                                  .copyWith(color: Colors.black),
+                            margin: EdgeInsets.symmetric(vertical: 8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Thể loại sân',
+                                  style: AppTextStyles.bold18
+                                      .copyWith(color: Colors.black),
+                                ),
+                                Obx(
+                                  () => GFMultiSelect(
+                                    items:
+                                        homeController.allCourtTypes.toList(),
+                                    onSelect: (value) {
+                                      homeController.A.clear();
+                                      homeController.A.addAll([...value]);
+                                    },
+                                    dropdownTitleTileText: '',
+                                    dropdownTitleTileMargin:
+                                        const EdgeInsets.symmetric(
+                                            vertical: 1, horizontal: 1),
+                                    dropdownTitleTilePadding:
+                                        const EdgeInsets.all(0),
+                                    dropdownUnderlineBorder: const BorderSide(
+                                        color: Colors.transparent, width: 2),
+                                    dropdownTitleTileBorder: Border.all(
+                                        color: Colors.black, width: 1),
+                                    dropdownTitleTileBorderRadius:
+                                        BorderRadius.circular(5),
+                                    expandedIcon: const Icon(
+                                      Icons.keyboard_arrow_down,
+                                      color: Colors.black,
+                                    ),
+                                    collapsedIcon: const Icon(
+                                      Icons.keyboard_arrow_up,
+                                      color: Colors.black,
+                                    ),
+                                    submitButton: GestureDetector(
+                                      onTap: () {
+                                        homeController.addAllCourtTypeByUser();
+                                        print(
+                                            '###${homeController.allCourTypesPicker}');
+                                      },
+                                      child: const Text('OK'),
+                                    ),
+                                    dropdownTitleTileTextStyle:
+                                        AppTextStyles.bold13,
+                                    padding: const EdgeInsets.all(6),
+                                    margin: const EdgeInsets.all(6),
+                                    activeBgColor:
+                                        Colors.green.withOpacity(0.5),
+                                    inactiveBorderColor: Colors.grey,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                          TextField(
-                            style: AppTextStyles.regular18
-                                .copyWith(color: Colors.black),
-                            controller: _timematchController,
-                            decoration: InputDecoration(
-                              hintText: ' ',
-                              border: OutlineInputBorder(),
-                              contentPadding: EdgeInsets.all(2),
+                          Container(
+                            margin: EdgeInsets.symmetric(vertical: 8),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Thời gian trận đấu',
+                                  style: AppTextStyles.bold18
+                                      .copyWith(color: Colors.black),
+                                ),
+                                TextField(
+                                  style: AppTextStyles.regular18
+                                      .copyWith(color: Colors.black),
+                                  controller: _timematchController,
+                                  decoration: InputDecoration(
+                                    hintText: ' ',
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Colors.black, // Màu viền
+                                        width: 2.0, // Độ rộng viền
+                                      ),
+                                    ),
+                                    contentPadding: EdgeInsets.all(8),
+                                  ),
+                                  onChanged: (value) {},
+                                ),
+                              ],
                             ),
-                            onChanged: (value) {},
                           ),
                           Obx(
                             () => Container(
@@ -190,8 +256,8 @@ class _FormMatchesCriteriaState extends State<FormMatchesCriteria> {
                                       );
                                     },
                                     child: Text(
-                                      'Thời gian bắt đầu : ',
-                                      style: AppTextStyles.regular18
+                                      'Thời gian bắt đầu  ',
+                                      style: AppTextStyles.bold18
                                           .copyWith(color: Colors.black),
                                     ),
                                   ),
@@ -200,7 +266,7 @@ class _FormMatchesCriteriaState extends State<FormMatchesCriteria> {
                                       margin: EdgeInsets.symmetric(vertical: 8),
                                       decoration: BoxDecoration(
                                           borderRadius:
-                                              BorderRadius.circular(8),
+                                              BorderRadius.circular(4),
                                           border: Border.all(
                                             color: Colors.black,
                                             width: 1,
@@ -246,8 +312,8 @@ class _FormMatchesCriteriaState extends State<FormMatchesCriteria> {
                                         );
                                       },
                                       child: Text(
-                                        'Thời gian hết hạn : ',
-                                        style: AppTextStyles.regular18
+                                        'Thời gian hết hạn  ',
+                                        style: AppTextStyles.bold18
                                             .copyWith(color: Colors.black),
                                       ),
                                     ),
@@ -274,50 +340,105 @@ class _FormMatchesCriteriaState extends State<FormMatchesCriteria> {
                                   ],
                                 ),
                               )),
+                          Text(
+                            'Địa chỉ',
+                            style: AppTextStyles.bold18
+                                .copyWith(color: Colors.black),
+                          ),
+                          Row(
+
+                            children: [
+                              Expanded(
+                                child: TextField(
+                                  controller: _textAddressController,
+                                  decoration: InputDecoration(
+                                    hintText: '',
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: 16.0),
+                             Obx(()=>  Expanded(
+                               child: DropdownButton<AddressCityModel>(
+                                 isExpanded: true,
+                                 value: homeController.selectedCity.value,
+                                 onChanged: (value) {
+                                   setState(() {
+                                     homeController.selectedCity.value = value!;
+                                     homeController.getDistrict(value.id!);
+                                   });
+                                 },
+                                 items: homeController.itemAddress.value!.map((option) {
+                                   return DropdownMenuItem<AddressCityModel>(
+                                     value: option,
+                                     child: Text(option!.name!
+                                     ),
+                                   );
+                                 }).toList(),
+                               ),
+                             ),),
+                              SizedBox(width: 16.0),
+                             Obx(()=> Expanded(
+                               child: DropdownButton<DistrictModel>(
+                                 isExpanded: true,
+                                 value: homeController.selectedDistrict.value,
+                                 onChanged: (value) {
+                                   setState(() {
+                                     homeController.selectedDistrict.value = value!;
+
+                                   });
+                                 },
+                                 items: homeController.itemDistrict.value!.map((option) {
+                                   return DropdownMenuItem<DistrictModel>(
+                                     value: option,
+                                     child: Text(option.name!),
+                                   );
+                                 }).toList(),
+                               ),
+                             ),),
+                            ],
+                          ),
                           Container(
-                            child: Row(
+                            margin: EdgeInsets.symmetric(vertical: 8),
+                            child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Container(
                                   child: Text(
                                     'Mô tả :     ',
-                                    style: AppTextStyles.regular18
+                                    style: AppTextStyles.bold18
                                         .copyWith(color: Colors.black),
                                   ),
                                 ),
-                                Expanded(
-                                  child: Container(
-                                    margin: EdgeInsets.symmetric(vertical: 8),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8),
-                                      border: Border.all(
-                                        color: Colors.black,
-                                        width: 1,
-                                      ),
+                                Container(
+                                  margin: EdgeInsets.symmetric(vertical: 8),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    border: Border.all(
+                                      color: Colors.black,
+                                      width: 1,
                                     ),
-                                    child: TextField(
-                                      controller: _descriptionController,
-                                      maxLines: 3,
-                                      decoration: InputDecoration(
-                                        hintText: 'Nhập mô tả ',
-                                        border: OutlineInputBorder(),
-                                        contentPadding: EdgeInsets.all(4),
-                                      ),
-                                      onChanged: (value) {},
+                                  ),
+                                  child: TextField(
+                                    controller: _descriptionController,
+                                    maxLines: 3,
+                                    decoration: InputDecoration(
+                                      hintText: 'Nhập mô tả ',
+                                      border: OutlineInputBorder(),
+                                      contentPadding: EdgeInsets.all(4),
                                     ),
+                                    onChanged: (value) {},
                                   ),
                                 ),
                               ],
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.symmetric(
-                                horizontal: 24.w, vertical: 16.h),
+                            margin: EdgeInsets.symmetric(vertical: 40.h),
                             width: double.infinity,
                             height: 40.h,
                             decoration: BoxDecoration(
-                              color: AppColors.buttonBlue,
-                              borderRadius: BorderRadius.circular(28.r),
+                              color: Colors.lightBlue,
+                              borderRadius: BorderRadius.circular(8.r),
                               boxShadow: [
                                 BoxShadow(
                                   color: AppColors.buttonBlue.withOpacity(0.3),
@@ -329,6 +450,7 @@ class _FormMatchesCriteriaState extends State<FormMatchesCriteria> {
                             ),
                             child: TextButton(
                               onPressed: () {
+                          print('#######${homeController.selectedDistrict.value!.name}');
                                 var item = itemTeamByUser
                                     .value![homeController.index.value];
                                 homeController.createMatchesCriteria(
@@ -354,14 +476,15 @@ class _FormMatchesCriteriaState extends State<FormMatchesCriteria> {
                                             achievements: item.achievements),
                                         addressList: [
                                           AddressModel(
-                                              region: 'so 8',
-                                              district: 'Sơn Trà',
-                                              city: 'Đà Nẵng'),
+                                              region: _textAddressController.text,
+                                              district: homeController.selectedDistrict.value!.name,
+                                              city: homeController.selectedCity.value!.name),
                                         ],
                                         skillLevelList: [
                                           'BEGINNER',
                                         ],
-                                        courtTypeList: homeController.allCourTypesPicker.value,
+                                        courtTypeList: homeController
+                                            .allCourTypesPicker.value,
                                         expiryTime:
                                             homeController.endTime.value,
                                         description: 'abc',
@@ -372,8 +495,6 @@ class _FormMatchesCriteriaState extends State<FormMatchesCriteria> {
                                             homeController.listTimeMatch,
                                         isAutoMap: true));
                                 Get.back();
-
-
                               },
                               style: TextButton.styleFrom(
                                 foregroundColor: Colors.white,
@@ -381,10 +502,14 @@ class _FormMatchesCriteriaState extends State<FormMatchesCriteria> {
                                   color: Colors.white,
                                 ),
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(28.r),
+                                  borderRadius: BorderRadius.circular(10.r),
                                 ),
                               ),
-                              child: Text('Tạo đội'),
+                              child: Text(
+                                'Tạo trận',
+                                style: AppTextStyles.regular18
+                                    .copyWith(color: Colors.black),
+                              ),
                             ),
                           ),
                         ],

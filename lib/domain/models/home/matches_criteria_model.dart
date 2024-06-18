@@ -59,8 +59,8 @@ class MatchCriteriaModel {
             .toList(),
         courtTypeList: (json['courtTypeList'] as List).map((e) => e.toString()).toList(),// Khởi tạo addressList từ JSON
         skillLevelList: (json['skillLevelList'] as List).map((e) => e.toString()).toList(),
-        expiryTime: json['expiryTime'] as String,
-        description: json['description'],
+        expiryTime: json['expiryTime'] != null ? json['expiryTime'] : '',
+        description: json['description'] != null ? json['description'] : '',
         status : EStatusApply.init(json['status']),
         timeMatch: json['timeMatch'] as int ?,
         isAutoMap: json['isAutoMap'] as bool ?,

@@ -22,7 +22,7 @@ class CreateMatchRepositoryImpl extends CreateMatchRepository {
   @override
   Future<Either<AppError, MatchModel>> createMatch(MatchModel data) async {
     try {
-      final url = "http://192.168.4.156:8080/api/matches";
+      final url = "https://soccermatch-production.up.railway.app/api/matches";
 
       final response =
       await _apiClient.post(url,body: data.toJson());

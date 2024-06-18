@@ -20,7 +20,7 @@ class UserModel {
 
   UserModel({
      this.id,
-    this.createdAt,
+      this.createdAt,
      this.updatedAt,
      this.phoneNumber,
      this.fullName,

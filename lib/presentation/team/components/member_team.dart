@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:footballmanager/presentation/team/components/info_memebr_team.dart';
 import 'package:get/get.dart';
 
 import '../../../core/styles/app_colors.dart';
 import '../../../core/styles/app_text_style.dart';
+import '../../../domain/serviceable/auth_serviceable.dart';
 import '../../../shared/widget/app_bg_body_view.dart';
 import '../../../shared/widget/scroll_view/single_chill_scroll_load_more_widget.dart';
 import '../myteam/team_detail_controller.dart';
@@ -16,9 +18,11 @@ class MemberTeam extends StatefulWidget {
 }
 
 class _MemberTeamState extends State<MemberTeam> {
+
+  final authStoreService = AuthStore.to;
   void _onRefresh() async {
     applicationController.fetchListApplyPending(
-        teamId: '0607a79a-ea0b-47aa-925e-ac650f075fcc', status: 'CONFIRMED');
+        teamId: authStoreService.idTeam, status: 'CONFIRMED');
   }
 
   TeamDetailController applicationController = TeamDetailController.to;
@@ -54,7 +58,10 @@ class _MemberTeamState extends State<MemberTeam> {
                       itemBuilder: (context, index) {
                         var item = Items[index];
                         return GestureDetector(
-                          onTap: () {},
+                          onTap: () async{
+                            await applicationController.getUserDetails(item.member!.id);
+                            Get.to(InforMemberTeam());
+                          },
                           child: Container(
                             margin: const EdgeInsets.symmetric(
                                 horizontal: 16, vertical: 8),

@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:footballmanager/common/enum/e_gender.dart';
 import 'package:footballmanager/common/enum/e_role_footballTeam.dart';
 import 'package:footballmanager/core/styles/app_text_style.dart';
 import 'package:footballmanager/domain/models/team/member_team_model.dart';
+import 'package:footballmanager/presentation/profile/profile_controller.dart';
 import 'package:footballmanager/presentation/team/discovery/discovery_details_controller.dart';
 import 'package:footballmanager/shared/widget/app_bg_body_view.dart';
+import 'package:get/get.dart';
 
 import '../../../domain/models/team/team_by_user_model.dart';
+import '../../../domain/models/user/user_detail_model.dart';
 
 class UserInfor extends StatefulWidget {
   const UserInfor({Key? key, required this.item}) : super(key: key);
@@ -18,6 +22,7 @@ class UserInfor extends StatefulWidget {
 
 class _UserInforState extends State<UserInfor> {
   DiscoveryController discoveryController = DiscoveryController.to;
+  ProfileController profileController = ProfileController.to;
   final _formKey = GlobalKey<FormState>();
   ERole? selectedRole;
 
@@ -31,6 +36,7 @@ class _UserInforState extends State<UserInfor> {
 
   @override
   Widget build(BuildContext context) {
+    var item = profileController.userDetail;
     var itemTeam = widget.item;
     return AppBgBodyView(
       child: Scaffold(
@@ -88,42 +94,15 @@ class _UserInforState extends State<UserInfor> {
                     ),
                   ),
                   SizedBox(height: 16.0),
-                  Center(
-                    child: ElevatedButton(
-                      onPressed: () {
-                        print('!!!!${itemTeam.id}');
-                        discoveryController.requestApply(MemberData(
-                          teamId: itemTeam.id!,
-                          member: MemberInfo(
-                              createAt: '01-06-2024 22:15',
-                              updateAt: '01-06-2024 22:15',
-                              id: '063a0ee7-2ad6-46bc-9309-a5d446ada10b',
-                              phoneNumber: "070-311-3730 x065",
-                              fullName: "Matthijs de Ligt",
-                              nickName: "Pedro Little",
-                              favoritePosition: "Strategist",
-                              description:
-                                  "Eos voluptatem aspernatur nesciunt asperiores esse.",
-                              gender: "FEMALE",
-                              birthday: "09-01-1962 06:56",
-                              signInMethod: "GOOGLE",
-                              status: "ACTIVE",
-                              avatarUrl:
-                                  "https://images.unsplash.com/photo-1683142028215-8529d43701fc?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8bG9nbyUyMGZvb3RiYWxsfGVufDB8fDB8fHww",
-                              username: "username58",
-                              email: "blake.keebler@yahoo.com",
-                              verifyEmail: true),
-                        ));
-                        if (_formKey.currentState!.validate()) {
-                          // Handle form submission
-                          print('Form submitted successfully!');
-                          print('${selectedRole?.title}');
-                        }
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 12.0, horizontal: 24.0),
-                        child: Text('Submit'),
+                  Obx(
+                    () => Center(
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 12.0, horizontal: 24.0),
+                          child: Text('Submit'),
+                        ),
                       ),
                     ),
                   ),

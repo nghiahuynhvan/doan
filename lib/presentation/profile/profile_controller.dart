@@ -26,7 +26,6 @@ class ProfileController extends GetxController {
   }
 
   Future<void> getUserDetails() async {
-    print("##########${authStoreService.idUser}");
     AppStatus.dismissLoading();
     final result = await userDetailRepository.getUserDetail(
         idUser: authStoreService.idUser);

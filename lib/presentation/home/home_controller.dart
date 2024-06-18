@@ -1,20 +1,36 @@
+import 'package:footballmanager/domain/models/address/district_model.dart';
+import 'package:footballmanager/domain/models/home/address_model.dart';
 import 'package:footballmanager/domain/models/home/matches_criteria_model.dart';
+import 'package:footballmanager/domain/repositories/address/address_city_repository.dart';
+import 'package:footballmanager/domain/repositories/address/district_repository.dart';
 import 'package:footballmanager/domain/repositories/home/list_matches_criteria_repository.dart';
 import 'package:get/get.dart';
 
 import '../../common/enum/e_type_court.dart';
+import '../../domain/models/address/address_city_model.dart';
 import '../../domain/repositories/home/create_matches_critetia_repository.dart';
-import '../../domain/serviceable/auth_serviceable.dart';
+
 
 class HomeController extends GetxController {
   HomeController(
-      this.listMatchesCriteriaRepository, this.createMatchesCriteriaRepository);
+      this.listMatchesCriteriaRepository,
+      this.createMatchesCriteriaRepository,
+      this.addressCityRepository,
+      this.districtRepository);
 
   static HomeController get to => Get.find();
 
   late ListMatchesCriteriaRepository listMatchesCriteriaRepository;
 
   late CreateMatchesCriteriaRepository createMatchesCriteriaRepository;
+
+  late AddressCityRepository addressCityRepository;
+
+  late DistrictRepository districtRepository;
+
+  var itemAddress = Rxn<List<AddressCityModel>>();
+  // var itemDistrict = Rxn<List<DistrictModel>>();
+  RxList<DistrictModel> itemDistrict = <DistrictModel>[].obs;
 
   var itemMatchesCriteria = Rxn<List<MatchCriteriaModel>>();
 
@@ -24,7 +40,9 @@ class HomeController extends GetxController {
   var listTimeMatch = RxList<String>([]);
   late RxString endTime = ''.obs;
   late RxInt index;
-
+  Rx<AddressCityModel?> selectedCity = Rx<AddressCityModel?>(null);
+  Rx<DistrictModel?> selectedDistrict = Rx<DistrictModel?>(null);
+  late RxInt selectedId;
   final RxList<String> allCourtTypes =
       RxList<String>.from(ETypeCourt.GetAllTypes());
   final RxList<String> allCourTypesPicker = <String>[].obs;
@@ -41,6 +59,8 @@ class HomeController extends GetxController {
   void onInit() {
     super.onInit();
     getAllMatchesCriteria();
+    getAddress();
+    getDistrict(6733);
   }
 
   void updateSituation(String inputText) {
@@ -65,5 +85,21 @@ class HomeController extends GetxController {
   Future<void> createMatchesCriteria(MatchCriteriaModel data) async {
     final result =
         await createMatchesCriteriaRepository.CreateMatchesCriteria(data);
+  }
+
+  Future<void> getAddress() async {
+    final result = await addressCityRepository.getCity();
+    result.fold((left) => print("error ${left.toString()}"), (right) {
+      itemAddress.value = right;
+    });
+  }
+  Future<void> getDistrict(int id)async {
+    final result = await districtRepository.getDistrictById(id);
+    result.fold((left) => print("error ${left.toString()}"), (right) {
+      selectedDistrict.value = null;
+      itemDistrict.value!.clear();
+      itemDistrict.value = right;
+    });
+
   }
 }

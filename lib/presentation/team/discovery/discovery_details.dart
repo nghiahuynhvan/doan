@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:footballmanager/domain/serviceable/auth_serviceable.dart';
+import 'package:footballmanager/presentation/profile/profile_controller.dart';
 import 'package:footballmanager/presentation/team/components/request_apply_team.dart';
 import 'package:footballmanager/presentation/team/discovery/discovery_details_controller.dart';
 import 'package:footballmanager/shared/widget/app_bg_body_view.dart';
@@ -8,6 +10,7 @@ import 'package:get/get.dart';
 
 import '../../../core/styles/app_colors.dart';
 import '../../../core/styles/app_text_style.dart';
+import '../../../domain/models/team/member_team_model.dart';
 
 class DiscoveryDetail extends StatefulWidget {
   const DiscoveryDetail({super.key});
@@ -18,6 +21,7 @@ class DiscoveryDetail extends StatefulWidget {
 
 class _DiscoveryDetailState extends State<DiscoveryDetail> {
   DiscoveryController discoveryController = DiscoveryController.to;
+  final authStore = AuthStore.to;
 
   @override
   Widget build(BuildContext context) {
@@ -90,9 +94,34 @@ class _DiscoveryDetailState extends State<DiscoveryDetail> {
                   ],
                 ),
               ),
+              authStore.idTeam == ""?
               GestureDetector(
                 onTap: () {
-                  Get.to(UserInfor(item: itemDetail,),);
+                  {
+                    var itemUser =discoveryController.userDetail.value;
+                    discoveryController.requestApply(MemberData(
+                      teamId: itemDetail.id!,
+                      member: MemberInfo(
+                          createAt: itemUser?.createdAt,
+                          updateAt: itemUser?.updatedAt,
+                          id: discoveryController.authStoreService.idUser,
+                          phoneNumber: itemUser?.phoneNumber,
+                          fullName: itemUser?.fullName,
+                          nickName: itemUser?.nickName,
+                          favoritePosition: itemUser?.favoritePosition,
+                          description:
+                          itemUser?.description,
+                          gender: 'FEMALE',
+                          birthday: itemUser?.birthday,
+                          signInMethod: "GOOGLE",
+                          status: 'ACTIVE',
+                          avatarUrl:
+                          itemUser?.avatarUrl,
+                          username: itemUser?.username,
+                          email: itemUser?.email,
+                          verifyEmail: true),
+                    ));
+                  }
                   setState(() {
                     _isButtonClicked = !_isButtonClicked;
                   });
@@ -114,7 +143,7 @@ class _DiscoveryDetailState extends State<DiscoveryDetail> {
                     ),
                   ),
                 ),
-              ),
+              ): Container(),
             ],
           ),
         ),

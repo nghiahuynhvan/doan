@@ -27,7 +27,7 @@ class updateMemberTeamRepositoryImpl extends updateMemberTeamRepository {
   @override
   Future<Either<AppError, dynamic>> updateMemberTeam(String id, MemberData data) async {
     try {
-      final url = "http://192.168.4.156:8080/api/team-members/${id}";
+      final url = "https://soccermatch-production.up.railway.app/api/team-members/${id}";
 
       final response = await _apiClient.put(url, body: data.toJson());
       return response;

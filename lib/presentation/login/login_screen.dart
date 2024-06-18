@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:footballmanager/core/styles/app_colors.dart';
 import 'package:footballmanager/core/styles/app_images.dart';
 import 'package:footballmanager/core/styles/app_text_style.dart';
+import 'package:footballmanager/presentation/login/components/register.dart';
 import 'package:footballmanager/presentation/login/components/rounded_btn.dart';
 import 'package:footballmanager/presentation/login/login_controller.dart';
 import 'package:footballmanager/shared/widget/app_bg_body_view.dart';
@@ -135,7 +136,7 @@ class _LoginState extends State<Login> {
                   padding: const EdgeInsets.all(8.0),
                   child: Center(
                     child: RoundedButton(
-                        btnText: 'LOGIN',
+                        btnText: 'ĐĂNG NHẬP',
                         color: AppColors.buttonBlue,
                         onPressed: () async {
                           // Get.offNamed(Routers.dashboard);
@@ -145,19 +146,7 @@ class _LoginState extends State<Login> {
                             showSpinner = true;
                           });
 
-                          // email: email, password: password);
-                          // if (user != null) {
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (context) => SuccessScreen()));
                         }),
-                  ),
-                ),
-                Center(
-                  child: Text(
-                    'Forgot Password?',
-                    style: TextStyle(color: Color(0xff14DAE2)),
                   ),
                 ),
                 SizedBox(
@@ -167,22 +156,19 @@ class _LoginState extends State<Login> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Dont have an account?',
+                      'Bạn đã có tài khoản chưa?',
                       style: TextStyle(
                           color: Colors.grey[600], fontWeight: FontWeight.w400),
                     ),
-                    // FlatButton(
-                    //   onPressed: () {
-                    //     Navigator.push(
-                    //         context,
-                    //         MaterialPageRoute(
-                    //             builder: (context) => CreateAccount()));
-                    //   },
-                    //   child: Text('Sign up',
-                    //       style: TextStyle(
-                    //         color: Color(0xff14DAE2),)
-                    //   ),
-                    // )
+                    GestureDetector(
+                      onTap: () {
+                       Get.to(CreateAccount());
+                      },
+                      child: Text('Đăng kí',
+                          style: TextStyle(
+                            color: Color(0xff14DAE2),)
+                      ),
+                    )
                   ],
                 )
               ],
