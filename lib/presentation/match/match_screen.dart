@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:footballmanager/presentation/match/details/match_details.dart';
 import 'package:footballmanager/presentation/match/match_controller.dart';
 import 'package:footballmanager/presentation/team/team_controller.dart';
 import 'package:get/get.dart';
@@ -49,7 +50,9 @@ class _MatchPageState extends State<MatchPage> {
                       var itemMaches =
                           matchController.itemMatchesByTeam.value![index];
                       return GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Get.to(MatchDetails(),arguments: itemMaches );
+                        },
                         child: Container(
                           margin: const EdgeInsets.symmetric(
                               horizontal: 16, vertical: 8),

@@ -4,6 +4,7 @@ import 'package:footballmanager/domain/models/home/matches_criteria_model.dart';
 import 'package:footballmanager/domain/repositories/address/address_city_repository.dart';
 import 'package:footballmanager/domain/repositories/address/district_repository.dart';
 import 'package:footballmanager/domain/repositories/home/list_matches_criteria_repository.dart';
+import 'package:footballmanager/domain/serviceable/auth_serviceable.dart';
 import 'package:get/get.dart';
 
 import '../../common/enum/e_type_court.dart';
@@ -19,6 +20,7 @@ class HomeController extends GetxController {
       this.districtRepository);
 
   static HomeController get to => Get.find();
+  final authStore = AuthStore.to;
 
   late ListMatchesCriteriaRepository listMatchesCriteriaRepository;
 
@@ -33,6 +35,8 @@ class HomeController extends GetxController {
   RxList<DistrictModel> itemDistrict = <DistrictModel>[].obs;
 
   var itemMatchesCriteria = Rxn<List<MatchCriteriaModel>>();
+  var itemMatchesCriteriaByUserId = Rxn<List<MatchCriteriaModel>>();
+  var itemMatchesCriteriaByTeamId = Rxn<List<MatchCriteriaModel>>();
 
   RxString situation = 'Trạng thái'.obs;
   RxString form = 'Hình thức'.obs;
@@ -59,6 +63,8 @@ class HomeController extends GetxController {
   void onInit() {
     super.onInit();
     getAllMatchesCriteria();
+    getAllMatchesCriteriaByTeamId(authStore.idTeam);
+    getAllMatchesCriteriaByUserId(authStore.idUser);
     getAddress();
     getDistrict(6733);
   }
@@ -82,10 +88,25 @@ class HomeController extends GetxController {
     });
   }
 
+  Future<void> getAllMatchesCriteriaByUserId(String userId)  async {
+    final result = await listMatchesCriteriaRepository.getAllMatchCriteriabyUserId(userId);
+    result.fold((left) => print("error ${left.toString()}"), (right) {
+      itemMatchesCriteriaByUserId.value = right;
+    });
+  }
+
+  Future<void> getAllMatchesCriteriaByTeamId(String teamId)  async {
+    final result = await listMatchesCriteriaRepository.getAllMatchCriteriabyTeamId(teamId);
+    result.fold((left) => print("error ${left.toString()}"), (right) {
+      itemMatchesCriteriaByTeamId.value = right;
+    });
+  }
+
   Future<void> createMatchesCriteria(MatchCriteriaModel data) async {
     final result =
         await createMatchesCriteriaRepository.CreateMatchesCriteria(data);
   }
+
 
   Future<void> getAddress() async {
     final result = await addressCityRepository.getCity();
@@ -102,4 +123,37 @@ class HomeController extends GetxController {
     });
 
   }
+  String getTitleByLanguage(String titleVi) {
+    switch (titleVi) {
+      case "Đã hủy":
+        return "CANCEL";
+      case "Đang chờ":
+        return "PENDING";
+      case "Đã xác nhận":
+        return "CONFIRMED";
+      default:
+        throw Exception("Invalid title in Vietnamese: $titleVi");
+    }
+  }
+  String getCourtTitle(String titleCourt)
+  {
+    switch(titleCourt)
+        {
+      case "FIVE_A_SIDE":
+        return "Sân 5";
+      case " SEVEN_A_SIDE":
+        return "Sân 7";
+      case "ELEVEN_A_SIDE":
+        return "Sân 11";
+      case "FUTSAL":
+        return "sân futsal";
+      case "BEACH_FOOTBALL":
+        return "sân biển";
+      case "INDOOR_FOOTBALL":
+        return "sân ngoài trời";
+      default:
+        throw Exception("Invalid title in Vietnamese: $titleCourt");
+    }
+        }
+
 }

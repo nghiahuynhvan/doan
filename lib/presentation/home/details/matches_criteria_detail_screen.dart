@@ -42,21 +42,22 @@ class _MatchesCriteriaDetailState extends State<MatchesCriteriaDetail> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        centerTitle: true,
         foregroundColor: Colors.black,
         title: Align(
           alignment: Alignment.center,
           child: Text(
-            'Thông tin chi tiết trận đấu',
-            style: AppTextStyles.bold19.copyWith(color: AppColors.bgBlack),
+            'Thông tin chi tiết trận đấu sảnh chờ',
+            style: AppTextStyles.bold19.copyWith(color: AppColors.bgWhite),
           ),
         ),
         systemOverlayStyle: SystemUiOverlayStyle.light,
-        backgroundColor: AppColors.bgWhite,
+        backgroundColor: Colors.lightBlueAccent,
         elevation: 0,
       ),
       body: SafeArea(
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 12.w),
+          margin: EdgeInsets.symmetric(horizontal: 12.w,vertical: 12.h),
           color: Colors.white,
           child: Column(
             children: [

@@ -11,6 +11,8 @@ import '../../models/home/matches_criteria_model.dart';
 abstract class ListMatchesCriteriaRepository extends Repository {
 
   Future<Either<AppError, List<MatchCriteriaModel>>> getAllMatchCriteria();
+  Future<Either<AppError, List<MatchCriteriaModel>>> getAllMatchCriteriabyUserId(String userId);
+  Future<Either<AppError, List<MatchCriteriaModel>>> getAllMatchCriteriabyTeamId(String teamId);
 }
 
 /// {@macro authentication_repository}
@@ -23,6 +25,37 @@ class ListMatchesCriteriaRepositoryImpl extends ListMatchesCriteriaRepository {
   Future<Either<AppError, List<MatchCriteriaModel>>> getAllMatchCriteria() async {
     try {
       final url = "https://soccermatch-production.up.railway.app/api/matches-criteria";
+
+      final response =
+      await _apiClient.get(url);
+      List<dynamic> data = response;
+      final result = data.map((e) => MatchCriteriaModel.fromJson(e)).toList();
+      print('@@@@@@@@@@@${result}');
+      return Right(result);
+    } on DioError catch (e) {
+      return LeftAPI(e);
+    }
+  }
+  @override
+  Future<Either<AppError, List<MatchCriteriaModel>>> getAllMatchCriteriabyUserId(String userId) async {
+    try {
+      final url = "https://soccermatch-production.up.railway.app/api/matches-criteria/my-criteria/$userId";
+
+      final response =
+      await _apiClient.get(url);
+      List<dynamic> data = response;
+      final result = data.map((e) => MatchCriteriaModel.fromJson(e)).toList();
+      print('@@@@@@@@@@@${result}');
+      return Right(result);
+    } on DioError catch (e) {
+      return LeftAPI(e);
+    }
+  }
+  @override
+  Future<Either<AppError, List<MatchCriteriaModel>>> getAllMatchCriteriabyTeamId(String teamId) async
+  {
+    try {
+      final url = "https://soccermatch-production.up.railway.app/api/matches-criteria/team/$teamId";
 
       final response =
       await _apiClient.get(url);

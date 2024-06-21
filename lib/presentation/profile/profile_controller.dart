@@ -33,6 +33,10 @@ class ProfileController extends GetxController {
       userDetail.value = right;
     });
   }
+  Future<void> deleteAccount() async {
+    final result = await userDetailRepository.deleteAccount(
+         authStoreService.idUser);
+  }
 
   RxString fullName = ''.obs;
   RxString faceBook = ''.obs;

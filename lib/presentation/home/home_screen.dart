@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:footballmanager/app.dart';
 import 'package:footballmanager/common/constants/app_constants.dart';
+import 'package:footballmanager/common/enum/e_status_apply.dart';
 import 'package:footballmanager/common/extensions/context_extensions/bottom_sheet_extensions.dart';
 import 'package:footballmanager/presentation/home/components/custom_form.dart';
 import 'package:footballmanager/presentation/home/components/custom_location.dart';
@@ -31,7 +32,7 @@ class _HomePageState extends State<HomePage> {
   HomeController homeController = HomeController.to;
 
   void _onRefresh() async {
-   homeController.getAllMatchesCriteria();
+    homeController.getAllMatchesCriteria();
   }
 
   @override
@@ -63,15 +64,13 @@ class _HomePageState extends State<HomePage> {
                         child: Row(
                           children: [
                             Container(
-                                height: 30.h,
-                                width: 120.h,
+
                                 margin: const EdgeInsets.symmetric(
                                     horizontal: 16, vertical: 16),
                                 child: Obx(() {
                                   return GestureDetector(
                                     child: Container(
-                                      width: 100.w,
-                                      height: 30.h,
+                                      padding : EdgeInsets.symmetric(horizontal: 4, vertical: 4),
                                       decoration: BoxDecoration(
                                         color: AppColors.bgWhiteLow1,
                                         borderRadius: BorderRadius.circular(8),
@@ -83,8 +82,7 @@ class _HomePageState extends State<HomePage> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Container(
-                                            margin: const EdgeInsets.symmetric(
-                                                horizontal: 8),
+                                          padding:  EdgeInsets.symmetric(horizontal: 4, vertical:4 ),
                                             child: Text(
                                               homeController.situation.value,
                                               style: AppTextStyles.regular16
@@ -108,15 +106,14 @@ class _HomePageState extends State<HomePage> {
                                   );
                                 })),
                             Container(
-                                height: 30.h,
-                                width: 120.h,
+
                                 margin: const EdgeInsets.symmetric(
                                     horizontal: 8, vertical: 16),
                                 child: Obx(() {
                                   return GestureDetector(
                                     child: Container(
-                                      width: 100.w,
-                                      height: 30.h,
+                                      padding:  EdgeInsets.symmetric(horizontal: 4, vertical:4 ),
+
                                       decoration: BoxDecoration(
                                         color: AppColors.bgWhiteLow1,
                                         borderRadius: BorderRadius.circular(8),
@@ -128,8 +125,7 @@ class _HomePageState extends State<HomePage> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Container(
-                                            margin: const EdgeInsets.symmetric(
-                                                horizontal: 8),
+                                            padding:  EdgeInsets.symmetric(horizontal: 4, vertical:4 ),
                                             child: Text(
                                               homeController.form.value,
                                               style: AppTextStyles.regular16
@@ -153,15 +149,13 @@ class _HomePageState extends State<HomePage> {
                                   );
                                 })),
                             Container(
-                                height: 30.h,
-                                width: 80.h,
                                 margin: const EdgeInsets.symmetric(
                                     horizontal: 8, vertical: 8),
                                 child: Obx(() {
                                   return GestureDetector(
+
                                     child: Container(
-                                      width: 100.w,
-                                      height: 30.h,
+                                      padding:  EdgeInsets.symmetric(horizontal: 4, vertical:4 ),
                                       decoration: BoxDecoration(
                                         color: AppColors.bgWhiteLow1,
                                         borderRadius: BorderRadius.circular(8),
@@ -173,8 +167,7 @@ class _HomePageState extends State<HomePage> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Container(
-                                            margin: const EdgeInsets.symmetric(
-                                                horizontal: 8),
+                                            padding:  EdgeInsets.symmetric(horizontal: 4, vertical:4 ),
                                             child: Text(
                                               homeController.location.value,
                                               style: AppTextStyles.regular16
@@ -221,128 +214,140 @@ class _HomePageState extends State<HomePage> {
                                         Get.toNamed(Routers.matches,
                                             arguments: itemTeamMatchCriteria);
                                       },
-                                      child: Container(
-                                          margin: const EdgeInsets.symmetric(
-                                              horizontal: 16, vertical: 8),
-                                          decoration: BoxDecoration(
-                                            color: AppColors.bgWhiteLow1,
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            border: Border.all(
-                                                color: AppColors.bgwhiteLow2),
-                                          ),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Container(
-                                                margin:
-                                                    const EdgeInsets.symmetric(
+                                      child: itemTeamMatchCriteria
+                                                  .status!.title ==
+                                              homeController.getTitleByLanguage(
+                                                  homeController
+                                                      .situation.value) && itemTeamMatchCriteria.addressList![0].city == homeController.location.value
+                                          ? Container(
+                                              margin:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 16,
+                                                      vertical: 8),
+                                              decoration: BoxDecoration(
+                                                color: AppColors.bgWhiteLow1,
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                                border: Border.all(
+                                                    color:
+                                                        AppColors.bgwhiteLow2),
+                                              ),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                    margin: const EdgeInsets
+                                                        .symmetric(
                                                         horizontal: 8,
                                                         vertical: 8),
-                                                child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                  child: SizedBox(
-                                                    width: 80,
-                                                    height: 80,
-                                                    child: itemTeamMatchCriteria
-                                                                .team!
-                                                                .urlImage !=
-                                                            null
-                                                        ? Image.network(
-                                                            itemTeamMatchCriteria
-                                                                .team!
-                                                                .urlImage!,
-                                                            fit: BoxFit.cover,
-                                                          )
-                                                        : Container(
-                                                            height: 40.h,
-                                                            width: 40.h,
-                                                            margin:
-                                                                const EdgeInsets
+                                                    child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8.0),
+                                                      child: SizedBox(
+                                                        width: 80,
+                                                        height: 80,
+                                                        child: itemTeamMatchCriteria
+                                                                    .team!
+                                                                    .urlImage !=
+                                                                null
+                                                            ? Image.network(
+                                                                itemTeamMatchCriteria
+                                                                    .team!
+                                                                    .urlImage!,
+                                                                fit: BoxFit
+                                                                    .cover,
+                                                              )
+                                                            : Container(
+                                                                height: 40.h,
+                                                                width: 40.h,
+                                                                margin: const EdgeInsets
                                                                     .symmetric(
                                                                     vertical:
                                                                         16,
                                                                     horizontal:
                                                                         12),
-                                                            child:
-                                                                const CircleAvatar(
-                                                              radius: 40,
-                                                              backgroundImage:
-                                                                  AssetImage(
-                                                                      AppImages
-                                                                          .userEmpty),
-                                                            ),
-                                                          ),
-                                                  ),
-                                                ),
-                                              ),
-                                              Container(
-                                                margin:
-                                                    const EdgeInsets.symmetric(
-                                                        vertical: 8),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      itemTeamMatchCriteria
-                                                          .team!.name,
-                                                      maxLines: 1,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      style: AppTextStyles
-                                                          .regular16
-                                                          .copyWith(
-                                                              color: AppColors
-                                                                  .bgWhite),
+                                                                child:
+                                                                    CircleAvatar(
+                                                                  radius: 40,
+                                                                  backgroundImage:
+                                                                      AssetImage(
+                                                                    AppImages
+                                                                        .userEmpty,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                      ),
                                                     ),
-                                                    Row(
+                                                  ),
+                                                  Container(
+                                                    margin: const EdgeInsets
+                                                        .symmetric(vertical: 8),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
                                                       children: [
                                                         Text(
                                                           itemTeamMatchCriteria
-                                                              .team!
-                                                              .skillLevel!
-                                                              .title,
-                                                          style: AppTextStyles
-                                                              .regular14
-                                                              .copyWith(
-                                                                  color: AppColors
-                                                                      .bgWhiteLow5),
-                                                        ),
-                                                      ],
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
-                                              Expanded(
-                                                child: Container(
-                                                    margin: EdgeInsets.all(8),
-                                                    width: 80,
-                                                    height: 80,
-                                                    child: Align(
-                                                        alignment: Alignment
-                                                            .bottomCenter,
-                                                        child: Text(
-                                                          itemTeamMatchCriteria
-                                                              .timeMatchList!
-                                                              .join(','),
-                                                          style: AppTextStyles
-                                                              .regular13
-                                                              .copyWith(
-                                                                  color: AppColors
-                                                                      .bgWhiteLow5),
+                                                              .team!.name,
                                                           maxLines: 1,
                                                           overflow: TextOverflow
                                                               .ellipsis,
-                                                        ))),
-                                              )
-                                            ],
-                                          )),
+                                                          style: AppTextStyles
+                                                              .regular16
+                                                              .copyWith(
+                                                                  color: AppColors
+                                                                      .bgWhite),
+                                                        ),
+                                                        Row(
+                                                          children: [
+                                                            Text(
+                                                              itemTeamMatchCriteria
+                                                                  .team!
+                                                                  .skillLevel!
+                                                                  .title,
+                                                              style: AppTextStyles
+                                                                  .regular14
+                                                                  .copyWith(
+                                                                      color: AppColors
+                                                                          .bgWhiteLow5),
+                                                            ),
+                                                          ],
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Expanded(
+                                                    child: Container(
+                                                        margin:
+                                                            EdgeInsets.all(8),
+                                                        width: 80,
+                                                        height: 80,
+                                                        child: Align(
+                                                            alignment: Alignment
+                                                                .bottomCenter,
+                                                            child: Text(
+                                                              itemTeamMatchCriteria
+                                                                  .timeMatchList!
+                                                                  .join(','),
+                                                              style: AppTextStyles
+                                                                  .regular13
+                                                                  .copyWith(
+                                                                      color: AppColors
+                                                                          .bgWhiteLow5),
+                                                              maxLines: 1,
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .ellipsis,
+                                                            ))),
+                                                  )
+                                                ],
+                                              ))
+                                          : Container(),
                                     );
                                   },
                                 ),

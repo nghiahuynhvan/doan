@@ -39,7 +39,7 @@ class _CreateAccountState extends State<CreateAccount> {
           children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 20, 20, 8),
-              child: Text('Create Account',
+              child: Text('Tạo tài khoản',
                 style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w600,
@@ -48,7 +48,7 @@ class _CreateAccountState extends State<CreateAccount> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Text('Please fill the input below.',
+              child: Text('Làm ơn nhập đầy đủ thông tin bên dưới',
                 style: TextStyle(
                     color: Colors.grey[600],
                     fontWeight: FontWeight.w400,

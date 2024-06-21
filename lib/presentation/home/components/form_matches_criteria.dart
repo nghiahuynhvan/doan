@@ -346,7 +346,6 @@ class _FormMatchesCriteriaState extends State<FormMatchesCriteria> {
                                 .copyWith(color: Colors.black),
                           ),
                           Row(
-
                             children: [
                               Expanded(
                                 child: TextField(

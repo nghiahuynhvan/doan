@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:footballmanager/presentation/home/home_controller.dart';
+import 'package:footballmanager/presentation/home/home_screen.dart';
 import 'package:get/get.dart';
 
 import '../../../common/constants/app_constants.dart';
@@ -44,23 +45,21 @@ class _CustomLocationState extends State<CustomLocation> {
                 width: double.infinity,
                 height: (56 * 4) + 24,
                 child: ListView.builder(
-                  itemCount: AppConstants.listLocation.length,
+                  scrollDirection: Axis.vertical,
+                  itemCount: homeController.itemAddress.value!.length,
                   itemBuilder: (context, index) {
-                    var item = AppConstants.listLocation[index];
+                    var item =homeController.itemAddress.value![index].name;
                     return ElevatedButton(
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(
                             AppColors.btGrey800),
                       ),
                       onPressed: () {
-                        // orderController.resetTimeSlotOrder(item.id);
-                        // orderController.saveSelectedFacility(item.id);
-                        // orderController.updateSelectedFacilityName();
-                        homeController.updateLocation(item);
+                        homeController.updateLocation(item!);
                         Get.back();
                       },
                       child: Text(
-                        item,
+                        item!,
                         style: AppTextStyles.bold19
                             .copyWith(color: AppColors.bgWhite),
                       ),
