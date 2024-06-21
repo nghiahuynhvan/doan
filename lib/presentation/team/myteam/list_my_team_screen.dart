@@ -22,6 +22,9 @@ class MyTeamScreen extends StatefulWidget {
 
 class _MyTeamScreenState extends State<MyTeamScreen> {
   TeamController listMyTeamController = TeamController.to;
+  void _onRefresh() async {
+    listMyTeamController.fetchListTeamByUser();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -104,6 +107,9 @@ class _MyTeamScreenState extends State<MyTeamScreen> {
                     ),
                     Expanded(
                       child: SingleChildScrollLoadView(
+                        onRefresh: () async {
+                          _onRefresh();
+                        },
                         child: ListView.builder(
                           shrinkWrap: true,
                           padding: EdgeInsets.zero,

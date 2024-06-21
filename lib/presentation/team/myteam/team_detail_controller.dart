@@ -45,8 +45,6 @@ class TeamDetailController extends GetxController {
     }
 
 
-
-
   Future<void> fetchListApplyPending({required String teamId, required String status}) async {
     AppStatus.dismissLoading();
     final result = await listApplyUserRepository.getUserPending(teamId: teamId, status: status);

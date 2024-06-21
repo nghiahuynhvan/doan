@@ -163,7 +163,7 @@ class _FormMatchesCriteriaState extends State<FormMatchesCriteria> {
                                       homeController.A.clear();
                                       homeController.A.addAll([...value]);
                                     },
-                                    dropdownTitleTileText: '',
+                                    dropdownTitleTileText: ''  ,
                                     dropdownTitleTileMargin:
                                         const EdgeInsets.symmetric(
                                             vertical: 1, horizontal: 1),

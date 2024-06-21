@@ -38,9 +38,9 @@ class HomeController extends GetxController {
   var itemMatchesCriteriaByUserId = Rxn<List<MatchCriteriaModel>>();
   var itemMatchesCriteriaByTeamId = Rxn<List<MatchCriteriaModel>>();
 
-  RxString situation = 'Trạng thái'.obs;
+  RxString situation = 'Đang chờ'.obs;
   RxString form = 'Hình thức'.obs;
-  RxString location = 'Khu vực'.obs;
+  RxString location = 'Đà Nẵng'.obs;
   var listTimeMatch = RxList<String>([]);
   late RxString endTime = ''.obs;
   late RxInt index;
@@ -151,6 +151,8 @@ class HomeController extends GetxController {
         return "sân biển";
       case "INDOOR_FOOTBALL":
         return "sân ngoài trời";
+      case "":
+        return "Chưa có dữ liệu";
       default:
         throw Exception("Invalid title in Vietnamese: $titleCourt");
     }

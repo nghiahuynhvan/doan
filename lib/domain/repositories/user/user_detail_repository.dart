@@ -18,6 +18,7 @@ abstract class UserDetailRepository extends Repository {
   /// {@endtemplate}
   Future<Either<AppError, UserModel>> getUserDetail({required String idUser});
   Future<Either<AppError,dynamic>> deleteAccount(String idUser);
+  Future<Either<AppError,dynamic>> updateUser(String idUser, UserModel dataUser);
 }
 
 /// {@macro authentication_repository}
@@ -43,6 +44,18 @@ class UserDetailRepositoryImpl extends UserDetailRepository {
     try {
       final url = "https://soccermatch-production.up.railway.app/api/users/$idUser";
       final response = await _apiClient.delete(url);
+      print('##${response}');
+      return response;
+    } on DioError catch (e) {
+      return LeftAPI(e);
+    }
+  }
+  @override
+  Future<Either<AppError,dynamic>> updateUser (String idUser, UserModel dataUser) async {
+    try {
+      final url = "https://soccermatch-production.up.railway.app/api/users/$idUser";
+
+      final response = await _apiClient.put(url, body:dataUser);
       print('##${response}');
       return response;
     } on DioError catch (e) {

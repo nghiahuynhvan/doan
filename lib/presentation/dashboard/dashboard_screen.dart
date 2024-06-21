@@ -73,15 +73,15 @@ class _MyDashBoardState extends State<MyDashBoard> {
               },
               items: [
                 _bottombarItem(
-                    AppIcons.icnHome, 'Home', AppIcons.icnHomeActive),
-                _bottombarItem(AppIcons.icnHistorySquare, 'Team',
+                    AppIcons.icnHome, 'Trang chủ', AppIcons.icnHomeActive),
+                _bottombarItem(AppIcons.icnHistorySquare, 'Đội',
                     AppIcons.icnHistorySquareActive),
-                _bottombarItem(AppIcons.icnHistorySquare, 'Match',
+                _bottombarItem(AppIcons.icnHistorySquare, 'Lịch đấu',
                     AppIcons.icnHistorySquareActive),
-                _bottombarItem(AppIcons.icnNotification, 'Tournament',
+                _bottombarItem(AppIcons.icnNotification, 'Giải',
                     AppIcons.icnNotificationActive),
                 _bottombarItem(
-                    AppIcons.icnProfile, 'Profile', AppIcons.icnProfileActive),
+                    AppIcons.icnProfile, 'Tôi', AppIcons.icnProfileActive),
               ],
             ),
           ),

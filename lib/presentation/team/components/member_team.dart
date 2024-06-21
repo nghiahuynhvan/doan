@@ -60,7 +60,7 @@ class _MemberTeamState extends State<MemberTeam> {
                         return GestureDetector(
                           onTap: () async{
                             await applicationController.getUserDetails(item.member!.id);
-                            Get.to(InforMemberTeam());
+                            Get.to(InforMemberTeam(),arguments: item);
                           },
                           child: Container(
                             margin: const EdgeInsets.symmetric(
@@ -105,8 +105,6 @@ class _MemberTeamState extends State<MemberTeam> {
                                               .copyWith(
                                               color: AppColors.bgWhite),
                                         ),
-                                        TextSpan(),
-                                        TextSpan(),
                                       ],
                                     ),
                                   ),

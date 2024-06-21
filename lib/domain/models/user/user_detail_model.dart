@@ -35,4 +35,6 @@ class UserModel {
      this.email,
      this.verifyEmail,
   });
+
+
 }

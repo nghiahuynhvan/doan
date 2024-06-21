@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import '../../../core/styles/app_colors.dart';
 import '../../../core/styles/app_images.dart';
 import '../../../core/styles/app_text_style.dart';
+import '../../../domain/models/team/member_team_model.dart';
 import '../../../shared/widget/app_bg_body_view.dart';
 
 class InforMemberTeam extends StatefulWidget {
@@ -20,6 +21,7 @@ class InforMemberTeam extends StatefulWidget {
 class _InforMemberTeamState extends State<InforMemberTeam> {
   final authStore = AuthStore.to;
   TeamDetailController teamDetailController = TeamDetailController.to;
+  var item = Get.arguments as MemberData;
 
   @override
   Widget build(BuildContext context) {
@@ -198,7 +200,7 @@ class _InforMemberTeamState extends State<InforMemberTeam> {
                                   ? GestureDetector(
                                 onTap: () => {
                                   teamDetailController.deleteMember(
-                                      teamDetailController.userDetail.value!.id!),
+                                      item.id!),
                                 },
                                 child: Container(
                                   height: 40.h,
