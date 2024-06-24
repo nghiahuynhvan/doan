@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:footballmanager/domain/models/team/member_team_model.dart';
 import 'package:footballmanager/domain/models/user/user_detail_model.dart';
 import 'package:footballmanager/domain/repositories/user/user_detail_repository.dart';
 import 'package:get/get.dart';
@@ -23,6 +24,11 @@ class ProfileController extends GetxController {
   void onInit() {
     super.onInit();
     getUserDetails();
+  }
+  Future<void> updateUser(String idUser, UserModel dataUser) async
+  {
+    final result = await userDetailRepository.updateUser(idUser, dataUser);
+
   }
 
   Future<void> getUserDetails() async {

@@ -3,15 +3,23 @@ import 'package:footballmanager/presentation/team/team_controller.dart';
 import 'package:get/get.dart';
 
 import '../../../common/services/app_status.dart';
+import '../../../domain/models/home/match_model.dart';
 import '../../../domain/models/team/team_by_user_model.dart';
 import '../../../domain/models/team/member_team_model.dart';
 import '../../../domain/models/user/user_detail_model.dart';
+import '../../../domain/repositories/home/list_matches_by_team_repository.dart';
 import '../../../domain/repositories/team/list_apply_user_repository.dart';
 import '../../../domain/repositories/team/update_member_team_repository.dart';
 import '../../../domain/repositories/user/user_detail_repository.dart';
 
 class TeamDetailController extends GetxController {
-  TeamDetailController(this.listApplyUserRepository,this._memberTeamRepository,this.updateStatusTeamRepository,this.userDetailRepository);
+  TeamDetailController(
+      this.listApplyUserRepository,
+      this._memberTeamRepository,
+      this.updateStatusTeamRepository,
+      this.userDetailRepository,
+      this._listMatchesByTeamRepository);
+
   static TeamDetailController get to => Get.find();
   late TeamByUserModel item;
   late ListApplyUserRepository listApplyUserRepository;
@@ -19,47 +27,56 @@ class TeamDetailController extends GetxController {
   late UserDetailRepository userDetailRepository;
 
   late UpdateStatusTeamRepository updateStatusTeamRepository;
-
+  late ListMatchesByTeamRepository _listMatchesByTeamRepository;
+  var itemMatchesByTeam = Rxn<List<MatchModel>>();
   var userDetail = Rxn<UserModel>();
 
   var itemApplyUser = Rxn<List<MemberData>>();
   late updateMemberTeamRepository _memberTeamRepository;
 
   @override
-  void onInit()
-  {
+  void onInit() {
     super.onInit();
     item = Get.arguments;
   }
+  Future<void> getMatchesByTeam(String Teamid) async {
+    final result = await _listMatchesByTeamRepository.getMachesByTeam(
+        teamId: Teamid);
+    result.fold((left) => print("error ${left.toString()}"), (right) {
+      itemMatchesByTeam.value = right;
+    });
+  }
+
   Future<void> getUserDetails(String id) async {
     AppStatus.dismissLoading();
-    final result = await userDetailRepository.getUserDetail(
-        idUser: id);
+    final result = await userDetailRepository.getUserDetail(idUser: id);
     result.fold((left) => print("error ${left.toString()}"), (right) {
       userDetail.value = right;
     });
   }
+
   Future<void> deleteMember(String id) async {
     AppStatus.dismissLoading();
     final result = await listApplyUserRepository.deleteMember(id);
-    }
+  }
 
-
-  Future<void> fetchListApplyPending({required String teamId, required String status}) async {
+  Future<void> fetchListApplyPending(
+      {required String teamId, required String status}) async {
     AppStatus.dismissLoading();
-    final result = await listApplyUserRepository.getUserPending(teamId: teamId, status: status);
+    final result = await listApplyUserRepository.getUserPending(
+        teamId: teamId, status: status);
     result.fold((left) => print("error ${left.toString()}"), (right) {
       itemApplyUser.value = right;
       print("#######$itemApplyUser.value");
     });
   }
 
-  void updateMemberTeam(String id, MemberData data)async{
+  void updateMemberTeam(String id, MemberData data) async {
     final result = await _memberTeamRepository.updateMemberTeam(id, data);
   }
-  void updateStatusTeam(String active,String idTeam)
-  async
-  {
-    final reslut = await updateStatusTeamRepository.updateStatusTeam(active,idTeam);
+
+  void updateStatusTeam(String active, String idTeam) async {
+    final reslut =
+        await updateStatusTeamRepository.updateStatusTeam(active, idTeam);
   }
 }

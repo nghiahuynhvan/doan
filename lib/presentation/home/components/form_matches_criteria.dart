@@ -431,6 +431,7 @@ class _FormMatchesCriteriaState extends State<FormMatchesCriteria> {
                               ],
                             ),
                           ),
+
                           Container(
                             margin: EdgeInsets.symmetric(vertical: 40.h),
                             width: double.infinity,
@@ -492,7 +493,7 @@ class _FormMatchesCriteriaState extends State<FormMatchesCriteria> {
                                             _timematchController.text),
                                         timeMatchList:
                                             homeController.listTimeMatch,
-                                        isAutoMap: true));
+                                        isAutoMap: false));
                                 Get.back();
                               },
                               style: TextButton.styleFrom(

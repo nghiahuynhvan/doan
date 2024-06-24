@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:footballmanager/domain/serviceable/auth_serviceable.dart';
+import 'package:footballmanager/presentation/team/components/history_match_team.dart';
 import 'package:footballmanager/presentation/team/components/member_team.dart';
 import 'package:footballmanager/presentation/team/myteam/team_detail_controller.dart';
 import 'package:footballmanager/shared/widget/app_bg_body_view.dart';
@@ -22,7 +24,7 @@ class TeamDetail extends StatefulWidget {
 
 class _TeamDetailState extends State<TeamDetail> {
   TeamDetailController teamDetailController = TeamDetailController.to;
-
+  final authStore = AuthStore.to;
   @override
   Widget build(BuildContext context) {
     var itemDetail = teamDetailController.item;
@@ -103,6 +105,7 @@ class _TeamDetailState extends State<TeamDetail> {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
+                    authStore.idUser == itemDetail.ownerId ?
                     Container(
                       height: 32.h,
                       width: 120.w,
@@ -145,7 +148,7 @@ class _TeamDetailState extends State<TeamDetail> {
                             ),
                           ),
                         ),
-                    ),
+                    ): Container(),
                     Container(
                       height: 32.h,
                       width: 120.w,
@@ -192,6 +195,10 @@ class _TeamDetailState extends State<TeamDetail> {
                       margin: const EdgeInsets.symmetric(
                           horizontal: 16, vertical: 16),
                       child:  GestureDetector(
+                        onTap: () async {
+                          await teamDetailController.getMatchesByTeam(itemDetail.id!);
+                          Get.to(HistoryMatchTeam());
+                        },
                         child: Container(
                           width: 100.w,
                           height: 30.h,
@@ -255,74 +262,7 @@ class _TeamDetailState extends State<TeamDetail> {
                         ),
                       ),
                     ),
-                    Container(
-                      height: 32.h,
-                      width: 120.w,
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 16),
-                      child:  GestureDetector(
-                        child: Container(
-                          width: 100.w,
-                          height: 30.h,
-                          decoration: BoxDecoration(
-                            color: AppColors.bgWhiteLow1,
-                            borderRadius: BorderRadius.circular(8),
-                            border:
-                            Border.all(color: AppColors.bgwhiteLow2),
-                          ),
-                          child: Row(
-                            mainAxisAlignment:
-                            MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Icon(Icons.settings,color: Colors.white,),
-                              Container(
-                                margin: const EdgeInsets.symmetric(
-                                    horizontal: 8),
-                                child: Text(
-                                  'Tùy chỉnh',
-                                  style: AppTextStyles.regular16
-                                      .copyWith(color: AppColors.bgWhite),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      height: 32.h,
-                      width: 120.w,
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 16),
-                      child:  GestureDetector(
-                        child: Container(
-                          width: 100.w,
-                          height: 30.h,
-                          decoration: BoxDecoration(
-                            color: AppColors.bgWhiteLow1,
-                            borderRadius: BorderRadius.circular(8),
-                            border:
-                            Border.all(color: AppColors.bgwhiteLow2),
-                          ),
-                          child: Row(
-                            mainAxisAlignment:
-                            MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Icon(Icons.settings,color: Colors.white,),
-                              Container(
-                                margin: const EdgeInsets.symmetric(
-                                    horizontal: 8),
-                                child: Text(
-                                  'Tùy chỉnh',
-                                  style: AppTextStyles.regular16
-                                      .copyWith(color: AppColors.bgWhite),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
+                    authStore.idUser == itemDetail.ownerId?
                     Container(
                       height: 32.h,
                       width: 120.w,
@@ -358,7 +298,8 @@ class _TeamDetailState extends State<TeamDetail> {
                           ),
                         ),
                       ),
-                    ),
+                    ):Container(),
+                    authStore.idUser == itemDetail.ownerId ?
                     Container(
                       height: 32.h,
                       width: 120.w,
@@ -394,7 +335,7 @@ class _TeamDetailState extends State<TeamDetail> {
                           ),
                         ),
                       ),
-                    ),
+                    ): Container(),
                   ],
                 ),
               )

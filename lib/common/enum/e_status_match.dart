@@ -34,7 +34,7 @@
       case EStatusMatch.in_progress:
         return "IN_PROGRESS";
       case EStatusMatch.completed:
-        return "COMPLETED";
+        return "Đã hoàn thành";
       case EStatusMatch.cancelled:
         return "CANCELLED";
       case EStatusMatch.postponed:

@@ -8,6 +8,7 @@ import 'package:footballmanager/common/enum/e_skillLevel.dart';
 import 'package:footballmanager/core/styles/app_images.dart';
 import 'package:footballmanager/domain/models/home/match_model.dart';
 import 'package:footballmanager/domain/models/team/team_by_user_model.dart';
+import 'package:footballmanager/domain/serviceable/auth_serviceable.dart';
 import 'package:footballmanager/presentation/home/details/matches_criteria_detail_controller.dart';
 import 'package:footballmanager/presentation/home/home_controller.dart';
 import 'package:get/get.dart';
@@ -34,6 +35,7 @@ class _MatchesCriteriaDetailState extends State<MatchesCriteriaDetail> {
   Widget build(BuildContext context) {
     var itemTeamByUserHome = teamController.itemTeamByUser;
     var itemDetail = matchesCriteriaDetailController.itemDetailHome;
+    final authStore = AuthStore.to;
     String? _selectedRole;
     String? _selectedTimeMatch;
     String? _selectedCourtType;
@@ -352,6 +354,9 @@ class _MatchesCriteriaDetailState extends State<MatchesCriteriaDetail> {
                            ],
                          ),
                        ),
+                        itemDetail.team?.ownerId
+                            != authStore.idUser ?
+                        itemDetail.status?.title == "PENDING" ?
                         Container(
                           margin: EdgeInsets.symmetric(
                               horizontal: 4.w, vertical: 24.h),
@@ -403,7 +408,37 @@ class _MatchesCriteriaDetailState extends State<MatchesCriteriaDetail> {
                             ),
                             child: Text('Ghép đội'),
                           ),
-                        ),
+                        ) : Container(
+                          margin: EdgeInsets.symmetric(
+                              horizontal: 4.w, vertical: 24.h),
+                          width: double.infinity,
+                          height: 40.h,
+                          decoration: BoxDecoration(
+                            color: AppColors.btGrey800,
+                            borderRadius: BorderRadius.circular(12.r),
+                            boxShadow: [
+                              BoxShadow(
+                                color: AppColors.btGrey800.withOpacity(0.3),
+                                offset: Offset(0, 8.h),
+                                blurRadius: 16.r,
+                                spreadRadius: 0,
+                              ),
+                            ],
+                          ),
+                          child: TextButton(
+                            onPressed: () {},
+                            style: TextButton.styleFrom(
+                              foregroundColor: Colors.white,
+                              textStyle: AppTextStyles.bold16.copyWith(
+                                color: Colors.white,
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(28.r),
+                              ),
+                            ),
+                            child: Text('Đã ghép đội'),
+                          ),
+                        ): Container(),
                       ],
                     ),
                   ),

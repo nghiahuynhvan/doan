@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:footballmanager/domain/models/user/user_detail_model.dart';
 import 'package:footballmanager/presentation/profile/profile_controller.dart';
 import 'package:footballmanager/shared/widget/app_bg_body_view.dart';
 import 'package:get/get.dart';
@@ -15,6 +16,7 @@ class Edit_ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<Edit_ProfilePage> {
   ProfileController profileController = ProfileController.to;
+
   final _nameController = TextEditingController();
   final _facebookController = TextEditingController();
   final _birthdayController = TextEditingController();
@@ -100,12 +102,16 @@ class _ProfilePageState extends State<Edit_ProfilePage> {
               SizedBox(height: 16.0.h),
               ElevatedButton(
                 onPressed: () {
-                  profileController.setUserInfor(
-                      _nameController.text,
-                      _facebookController.text,
-                      _birthdayController.text,
-                      _addressController.text,
-                      _descriptionController.text);
+                 profileController.updateUser(profileController.userDetail.value!.id! ,UserModel(
+                   id:profileController.userDetail.value!.id! ,
+                   phoneNumber: "123456789",
+                   fullName: "nghiahuynh",
+                   nickName: "vanpersi",
+                   favoritePosition: "GOALKEEPER",
+                   description: "mot minh ta chap het",
+                   username: profileController.userDetail.value!.username,
+                   email: profileController.userDetail.value!.email,
+                 ));
 
                   Get.back();
                 },

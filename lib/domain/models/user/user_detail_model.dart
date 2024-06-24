@@ -35,6 +35,23 @@ class UserModel {
      this.email,
      this.verifyEmail,
   });
-
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'createdAt': createdAt,
+      'updatedAt': updatedAt,
+      'phoneNumber': phoneNumber,
+      'fullName': fullName,
+      'nickName': nickName,
+      'favoritePosition': favoritePosition,
+      'description': description,
+      'birthday': birthday,
+      'status': status?.title,
+      'avatarUrl': avatarUrl,
+      'username': username,
+      'email': email,
+      'verifyEmail': verifyEmail,
+    };
+  }
 
 }

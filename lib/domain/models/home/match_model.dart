@@ -1,6 +1,6 @@
 import '../team/team_by_user_model.dart';
 
-class MatchModel {
+class   MatchModel {
   String? id;
   String? tournamentId;
   TeamByUserModel? homeTeam;
