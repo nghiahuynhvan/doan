@@ -9,12 +9,14 @@ import '../../../common/app_errors/app_error.dart';
 import '../../../common/services/network/custom_http_client.dart';
 import '../../models/home/matches_criteria_model.dart';
 import '../../models/tournament/tour_detail_model.dart';
+import '../../models/tournament/tour_team_model.dart';
 
 
 abstract class TournamentRepository extends Repository {
 
   Future<Either<AppError, List<TournamentModel>>> getTournament();
   Future<Either<AppError, TourDetailModel>> getTourDetails(String id);
+  Future<Either<AppError, TourTeamModel>> registerTour(TourTeamModel data);
 }
 
 /// {@macro authentication_repository}
@@ -49,6 +51,18 @@ class TournamentRepositoryImpl extends TournamentRepository {
       final result = TourDetailModel.fromJson(response);
       print('###############${result}');
       return Right(result);
+    } on DioError catch (e) {
+      return LeftAPI(e);
+    }
+  }
+  @override
+  Future<Either<AppError, TourTeamModel>> registerTour(TourTeamModel data) async {
+    try {
+      final url = "https://soccermatch-production.up.railway.app/api/tournament-teams";
+
+      final response =
+      await _apiClient.post(url,body: data.toJson());
+      return response;
     } on DioError catch (e) {
       return LeftAPI(e);
     }

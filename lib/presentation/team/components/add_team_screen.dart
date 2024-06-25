@@ -144,7 +144,7 @@ class _AddTeamState extends State<AddTeam> {
                           decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                           ),
-                          dropdownColor: Colors.white,
+                          dropdownColor: Colors.lightBlueAccent,
                           iconEnabledColor: Colors.white,
                           iconDisabledColor: Colors.white,
                           style: TextStyle(
@@ -191,6 +191,7 @@ class _AddTeamState extends State<AddTeam> {
                             ),
                           );
                         }).toList(),
+                        dropdownColor: Colors.lightBlueAccent,
                       ),
                     ),),
                     SizedBox(width: 16.0),
@@ -212,6 +213,7 @@ class _AddTeamState extends State<AddTeam> {
                             ),),
                           );
                         }).toList(),
+                        dropdownColor: Colors.lightBlueAccent,
                       ),
                     ),),
                   ],

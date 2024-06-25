@@ -7,6 +7,7 @@ import 'package:footballmanager/presentation/login/components/rounded_btn.dart';
 import 'package:footballmanager/presentation/login/login_controller.dart';
 import 'package:get/get.dart';
 
+import '../../../shared/widget/dialog/app_custom_dialog.dart';
 import '../login_screen.dart';
 
 
@@ -206,18 +207,26 @@ class _CreateAccountState extends State<CreateAccount> {
                 child: RoundedButton(
                   btnText: 'Đăng kí',
                   color: Color(0xff14DAE2),
-                  onPressed: () async {
-                    setState(() {
-                      showSpinner = true;
-                    });
-                    try {
-                      loginController.handeRegister(fullname, email, username, password);
-                      print('!!!!Success');
-                    } catch (e) {
-                      print(e);
-                    }
-                    // Add login code
-                  },
+                  onPressed: () => {
+
+                      loginController.handeRegister(fullname, email, username, password),
+                          showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (BuildContext context) {
+                              return AppCustomDialog(
+                                title: 'Đăng kí thành công',
+                                confirmButton: AppDialogButton(
+                                  text: 'Quay lại',
+                                  onPressed: () async {
+                                    Get.back();
+                                  },
+                                ),
+                              );
+                            },
+                          ),
+                        }
+                    // Add login cod
                 ),
               ),
             ),

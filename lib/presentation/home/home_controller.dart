@@ -47,6 +47,7 @@ class HomeController extends GetxController {
   Rx<AddressCityModel?> selectedCity = Rx<AddressCityModel?>(null);
   Rx<DistrictModel?> selectedDistrict = Rx<DistrictModel?>(null);
   late RxInt selectedId;
+  late RxString selectedSkillLevel = ''.obs;
   final RxList<String> allCourtTypes =
       RxList<String>.from(ETypeCourt.GetAllTypes());
   final RxList<String> allCourTypesPicker = <String>[].obs;

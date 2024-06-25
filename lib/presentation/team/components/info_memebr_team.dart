@@ -247,9 +247,14 @@ _itemInformation(Widget widget, String text) {
     child: Row(
       children: [
         widget,
-        Text(
-          text,
-          style: AppTextStyles.regular16.copyWith(color: AppColors.bgWhite),
+        Container(
+          width: 200.w,
+          child: Text(
+            text,
+            style: AppTextStyles.regular16.copyWith(color: AppColors.bgWhite),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
         ),
       ],
     ),

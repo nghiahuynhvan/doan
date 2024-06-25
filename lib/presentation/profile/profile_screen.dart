@@ -47,79 +47,78 @@ class _ProfilePageState extends State<ProfilePage> {
         backgroundColor: AppColors.appbarWhiteLow,
         elevation: 0,
       ),
-      body: Stack(
+      body: authStoreService.isLogged.value == true ?Stack(
         children: <Widget>[
-          Column(
-            children: <Widget>[
-              GestureDetector(
-                onTap: () => {},
-                child: Container(
-                  width: double.infinity,
-                  margin:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: AppColors.bgWhite.withOpacity(0.1),
-                  ),
-                  child: Obx(
-                    () => profileController.userDetail.value != null
-                        ? Row(
-                            children: <Widget>[
-                              Container(
-                                margin: EdgeInsets.symmetric(
-                                    vertical: 8, horizontal: 8),
-                                child: profileController.userDetail.value!.avatarUrl != null ?
-                                CircleAvatar(
-                                  radius: 40,
-                                  backgroundImage: NetworkImage(
-                                      profileController
-                                          .userDetail.value!.avatarUrl!),
-                                ) :
-                                CircleAvatar(
-                                  radius: 40,
-                                  backgroundImage:
-                                  AssetImage(
-                                      AppImages.userEmpty),
+          SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                GestureDetector(
+                  onTap: () => {},
+                  child: Container(
+                    width: double.infinity,
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: AppColors.bgWhite.withOpacity(0.1),
+                    ),
+                    child: Obx(
+                      () => profileController.userDetail.value != null
+                          ? Row(
+                              children: <Widget>[
+                                Container(
+                                  margin: EdgeInsets.symmetric(
+                                      vertical: 8, horizontal: 8),
+                                  child: profileController.userDetail.value!.avatarUrl != null ?
+                                  CircleAvatar(
+                                    radius: 40,
+                                    backgroundImage: NetworkImage(
+                                        profileController
+                                            .userDetail.value!.avatarUrl!),
+                                  ) :
+                                  CircleAvatar(
+                                    radius: 40,
+                                    backgroundImage:
+                                    AssetImage(
+                                        AppImages.userEmpty),
+                                  ),
                                 ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.symmetric(
-                                    vertical: 8, horizontal: 4),
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      profileController
-                                          .userDetail.value!.fullName!,
-                                      style: AppTextStyles.regular18
-                                          .copyWith(color: AppColors.bgWhite),
-                                    ),
-                                    Text(
-                                      profileController
-                                          .userDetail.value!.favoritePosition ?? '',
-                                      style: AppTextStyles.regular16.copyWith(
-                                          color: AppColors.bgWhiteLow5),
-                                    )
-                                  ],
-                                ),
-                              )
-                            ],
-                          )
-                        : Container(),
+                                Container(
+                                  margin: EdgeInsets.symmetric(
+                                      vertical: 8, horizontal: 4),
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        profileController
+                                            .userDetail.value!.fullName!,
+                                        style: AppTextStyles.regular18
+                                            .copyWith(color: AppColors.bgWhite),
+                                      ),
+                                      Text(
+                                        profileController
+                                            .userDetail.value!.favoritePosition ?? '',
+                                        style: AppTextStyles.regular16.copyWith(
+                                            color: AppColors.bgWhiteLow5),
+                                      )
+                                    ],
+                                  ),
+                                )
+                              ],
+                            )
+                          : Container(),
+                    ),
                   ),
                 ),
-              ),
-              SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: Container(
+                Container(
                     width: double.infinity,
                     padding : EdgeInsets.symmetric(
                         horizontal: 8.w, vertical: 8.h),
-                    decoration: BoxDecoration(
-                      color: AppColors.bgWhiteLow1,
-                      borderRadius:  BorderRadius.circular(
-                        16.r
-                      ),
-                    ),
+                    // decoration: BoxDecoration(
+                    //   color: AppColors.bgWhiteLow1,
+                    //   borderRadius:  BorderRadius.circular(
+                    //     16.r
+                    //   ),
+                    // ),
                     child: Obx(
                       () => profileController.userDetail.value != null
                           ? Column(
@@ -205,7 +204,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                         size: 24,
                                       ),
                                     ),
-                                    profileController.getDecrib()),
+                                    profileController.userDetail.value!.description ?? "Chưa có mô tả"),
                                 Row(
                                   children: [
                                     Container(
@@ -248,7 +247,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                       var itemAchieve =
                                           profileController.listAchieve[index];
                                       return Container(
-
+            
                                         decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(8),
@@ -312,7 +311,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     ),
                                   },
                                   child: Container(
-
+            
                                     width: double.infinity,
                                     margin: const EdgeInsets.only(
                                         top: 16, left: 16, right: 16),
@@ -338,16 +337,46 @@ class _ProfilePageState extends State<ProfilePage> {
                                     ),
                                   ),
                                 ),
-
+            
                               ],
                             )
-                          : Container(),
-                    )),
-              )
-            ],
+                          :Container()
+                    ),)
+              ],
+            ),
           )
         ],
-      ),
+      ): GestureDetector(
+        onTap: (){
+          Get.offNamed(Routers.login);
+        },
+        child: Container(
+
+          width: double.infinity,
+          margin: const EdgeInsets.only(
+              top: 16, left: 16, right: 16),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            color: AppColors.bgWhite.withOpacity(0.1),
+          ),
+          child: Row(
+            children: [
+              Container(
+                padding : EdgeInsets.symmetric(
+                    horizontal: 8.w, vertical: 8.h),
+                margin: const EdgeInsets.symmetric(
+                    horizontal: 16),
+                child: Text(
+                  'Đăng nhập',
+                  style: AppTextStyles.regular18
+                      .copyWith(
+                      color: AppColors.bgWhite),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ) ,
     ));
   }
 }
@@ -357,9 +386,14 @@ _itemInformation(Widget widget, String text) {
     child: Row(
       children: [
         widget,
-        Text(
-          text,
-          style: AppTextStyles.regular16.copyWith(color: AppColors.bgWhite),
+        Container(
+          width: 200.w,
+          child: Text(
+            text,
+            style: AppTextStyles.regular16.copyWith(color: AppColors.bgWhite),
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
+          ),
         ),
       ],
     ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:footballmanager/domain/serviceable/auth_serviceable.dart';
 import 'package:footballmanager/presentation/field/components/schedule_tour_screen.dart';
 import 'package:footballmanager/presentation/field/components/tour_table_screen.dart';
 import 'package:footballmanager/presentation/field/components/tour_team_screen.dart';
@@ -10,7 +11,10 @@ import 'package:get/get.dart';
 import '../../core/styles/app_colors.dart';
 import '../../core/styles/app_images.dart';
 import '../../core/styles/app_text_style.dart';
+import '../../domain/models/tournament/tour_team_model.dart';
 import '../../shared/widget/app_bg_body_view.dart';
+import '../../shared/widget/dialog/app_custom_dialog.dart';
+import '../team/team_controller.dart';
 
 class TourDetails extends StatefulWidget {
   const TourDetails({super.key});
@@ -21,11 +25,14 @@ class TourDetails extends StatefulWidget {
 
 class _TourDetailsState extends State<TourDetails> {
   FieldController tourDetailsController = FieldController.to;
+  final authStore = AuthStore.to;
+
   @override
   Widget build(BuildContext context) {
     var itemTour = tourDetailsController.tourDetail.value!.tournament!;
-    var itemTeamTour = tourDetailsController.tourDetail.value!.tournamentTeamConfirm!;
-    var itemScheldule= tourDetailsController.tourDetail.value!.matchFootballs!;
+    var itemTeamTour =
+        tourDetailsController.tourDetail.value!.tournamentTeamConfirm!;
+    var itemScheldule = tourDetailsController.tourDetail.value!.matchFootballs!;
     var itemTable = tourDetailsController.tourDetail.value!.groupTeamDTOList!;
     return AppBgBodyView(
       child: Scaffold(
@@ -48,7 +55,7 @@ class _TourDetailsState extends State<TourDetails> {
           child: Column(
             children: [
               Container(
-                margin:const EdgeInsets.symmetric(horizontal: 8),
+                margin: const EdgeInsets.symmetric(horizontal: 8),
                 child: Column(
                   children: [
                     Container(
@@ -73,30 +80,29 @@ class _TourDetailsState extends State<TourDetails> {
                                     )
                                   ],
                                 ),
-                                itemTour.imageList![0] != null ?
-                                CircleAvatar(
-                                  radius: 40,
-                                  backgroundImage: NetworkImage(
-
-                                      itemTour.imageList![0]),
-                                ): CircleAvatar(
-                                  radius: 40,
-                                  backgroundImage:
-                                  AssetImage(
-                                      AppImages.userEmpty),
-                                ),
+                                itemTour.imageList![0] != null
+                                    ? CircleAvatar(
+                                        radius: 40,
+                                        backgroundImage: NetworkImage(
+                                            itemTour.imageList![0]),
+                                      )
+                                    : CircleAvatar(
+                                        radius: 40,
+                                        backgroundImage:
+                                            AssetImage(AppImages.userEmpty),
+                                      ),
                               ],
                             ),
                           ),
-                          _itemDetail('Hình thức', itemTour.type?? "-"),
+                          _itemDetail('Hình thức', itemTour.type ?? "-"),
                           _itemDetail(
-                              'Ban tổ chức', itemTour.personContact??"-"),
-                          _itemDetail('Địa điểm', itemTour.address??"-"),
-                          _itemDetail('Số điện thoại', itemTour.phoneContact??"-"),
-                          _itemDetail('Trình độ', itemTour.levelRequire??"-"),
-                          _itemDetail('Bắt đầu', itemTour.startTime??"-"),
-                          _itemDetail('Kết thúc', itemTour.endTime??"-"),
-
+                              'Ban tổ chức', itemTour.personContact ?? "-"),
+                          _itemDetail('Địa điểm', itemTour.address ?? "-"),
+                          _itemDetail(
+                              'Số điện thoại', itemTour.phoneContact ?? "-"),
+                          _itemDetail('Trình độ', itemTour.levelRequire ?? "-"),
+                          _itemDetail('Bắt đầu', itemTour.startTime ?? "-"),
+                          _itemDetail('Kết thúc', itemTour.endTime ?? "-"),
                         ],
                       ),
                     ),
@@ -104,39 +110,39 @@ class _TourDetailsState extends State<TourDetails> {
                 ),
               ),
               Container(
-                child:
-                Text('QUẢN LÝ GIẢI ĐẤU', style: AppTextStyles.bold16.copyWith(color: Colors.white),),
+                child: Text(
+                  'QUẢN LÝ GIẢI ĐẤU',
+                  style: AppTextStyles.bold16.copyWith(color: Colors.white),
+                ),
               ),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
                     Container(
-
                       margin: const EdgeInsets.symmetric(
                           horizontal: 16, vertical: 16),
-                      child:  GestureDetector(
-                        onTap: ()=> {
-
-                       Get.to(TourTeam(), arguments: itemTeamTour)
-                        },
+                      child: GestureDetector(
+                        onTap: () =>
+                            {Get.to(TourTeam(), arguments: itemTeamTour)},
                         child: Container(
-                          padding:
-                          EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.h),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 4.w, vertical: 4.h),
                           decoration: BoxDecoration(
                             color: AppColors.bgWhiteLow1,
                             borderRadius: BorderRadius.circular(8),
-                            border:
-                            Border.all(color: AppColors.bgwhiteLow2),
+                            border: Border.all(color: AppColors.bgwhiteLow2),
                           ),
                           child: Row(
-                            mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Icon(Icons.sports_soccer,color: Colors.white,),
+                              Icon(
+                                Icons.sports_soccer,
+                                color: Colors.white,
+                              ),
                               Container(
-                                margin: const EdgeInsets.symmetric(
-                                    horizontal: 8),
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 8),
                                 child: Text(
                                   'Đội bóng',
                                   style: AppTextStyles.regular16
@@ -149,32 +155,30 @@ class _TourDetailsState extends State<TourDetails> {
                       ),
                     ),
                     Container(
-
                       margin: const EdgeInsets.symmetric(
                           horizontal: 16, vertical: 16),
-                      child:  GestureDetector(
-                        onTap: ()=> {
-
-                          Get.to(Schedule(),arguments: itemScheldule),
-
+                      child: GestureDetector(
+                        onTap: () => {
+                          Get.to(Schedule(), arguments: itemScheldule),
                         },
                         child: Container(
-                          padding:
-                          EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.h),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 4.w, vertical: 4.h),
                           decoration: BoxDecoration(
                             color: AppColors.bgWhiteLow1,
                             borderRadius: BorderRadius.circular(8),
-                            border:
-                            Border.all(color: AppColors.bgwhiteLow2),
+                            border: Border.all(color: AppColors.bgwhiteLow2),
                           ),
                           child: Row(
-                            mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Icon(Icons.schedule,color: Colors.white,),
+                              Icon(
+                                Icons.schedule,
+                                color: Colors.white,
+                              ),
                               Container(
-                                margin: const EdgeInsets.symmetric(
-                                    horizontal: 8),
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 8),
                                 child: Text(
                                   'Lịch đấu',
                                   style: AppTextStyles.regular16
@@ -187,36 +191,34 @@ class _TourDetailsState extends State<TourDetails> {
                       ),
                     ),
                     Container(
-
                       margin: const EdgeInsets.symmetric(
                           horizontal: 16, vertical: 16),
-                      child:  GestureDetector(
+                      child: GestureDetector(
                         onTap: () async {
-
-                          Get.to(TableTour(),arguments: itemTable);
+                          Get.to(TableTour(), arguments: itemTable);
                         },
                         child: Container(
-                          padding:
-                          EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.h),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 4.w, vertical: 4.h),
                           decoration: BoxDecoration(
                             color: AppColors.bgWhiteLow1,
                             borderRadius: BorderRadius.circular(8),
-                            border:
-                            Border.all(color: AppColors.bgwhiteLow2),
+                            border: Border.all(color: AppColors.bgwhiteLow2),
                           ),
                           child: Row(
-                            mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Icon(Icons.access_time_filled,color: Colors.white,),
+                              Icon(
+                                Icons.access_time_filled,
+                                color: Colors.white,
+                              ),
                               Container(
-                                margin: const EdgeInsets.symmetric(
-                                    horizontal: 8),
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 8),
                                 child: Text(
                                   'Bảng đấu',
                                   style: AppTextStyles.regular16
                                       .copyWith(color: AppColors.bgWhite),
-
                                 ),
                               ),
                             ],
@@ -224,115 +226,53 @@ class _TourDetailsState extends State<TourDetails> {
                         ),
                       ),
                     ),
-                    // Container(
-                    //   height: 32.h,
-                    //   width: 120.w,
-                    //   margin: const EdgeInsets.symmetric(
-                    //       horizontal: 16, vertical: 16),
-                    //   child:  GestureDetector(
-                    //     child: Container(
-                    //       width: 100.w,
-                    //       height: 30.h,
-                    //       decoration: BoxDecoration(
-                    //         color: AppColors.bgWhiteLow1,
-                    //         borderRadius: BorderRadius.circular(8),
-                    //         border:
-                    //         Border.all(color: AppColors.bgwhiteLow2),
-                    //       ),
-                    //       child: Row(
-                    //         mainAxisAlignment:
-                    //         MainAxisAlignment.spaceEvenly,
-                    //         children: [
-                    //           Icon(Icons.settings,color: Colors.white,),
-                    //           Container(
-                    //             margin: const EdgeInsets.symmetric(
-                    //                 horizontal: 8),
-                    //             child: Text(
-                    //               'Tùy chỉnh',
-                    //               style: AppTextStyles.regular16
-                    //                   .copyWith(color: AppColors.bgWhite),
-                    //             ),
-                    //           ),
-                    //         ],
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
-                    // Container(
-                    //   height: 32.h,
-                    //   width: 120.w,
-                    //   margin: const EdgeInsets.symmetric(
-                    //       horizontal: 16, vertical: 16),
-                    //   child:  GestureDetector(
-                    //     onTap: () {
-                    //       teamDetailController.updateStatusTeam("APPLY",itemDetail.id!);
-                    //     },
-                    //     child: Container(
-                    //       width: 140.w,
-                    //       height: 30.h,
-                    //       decoration: BoxDecoration(
-                    //         color: AppColors.bgWhiteLow1,
-                    //         borderRadius: BorderRadius.circular(8),
-                    //         border:
-                    //         Border.all(color: AppColors.bgwhiteLow2),
-                    //       ),
-                    //       child: Row(
-                    //         mainAxisAlignment:
-                    //         MainAxisAlignment.spaceEvenly,
-                    //         children: [
-                    //           Container(
-                    //             margin: const EdgeInsets.symmetric(
-                    //                 horizontal: 8),
-                    //             child: Text(
-                    //               'Mở ứng tuyển',
-                    //               style: AppTextStyles.regular16
-                    //                   .copyWith(color: AppColors.bgWhite),
-                    //             ),
-                    //           ),
-                    //         ],
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
-                    // Container(
-                    //   height: 32.h,
-                    //   width: 120.w,
-                    //   margin: const EdgeInsets.symmetric(
-                    //       horizontal: 16, vertical: 16),
-                    //   child:  GestureDetector(
-                    //     onTap: () {
-                    //       teamDetailController.updateStatusTeam("ACTIVE",itemDetail.id!);
-                    //     },
-                    //     child: Container(
-                    //       width: 140.w,
-                    //       height: 30.h,
-                    //       decoration: BoxDecoration(
-                    //         color: AppColors.bgWhiteLow1,
-                    //         borderRadius: BorderRadius.circular(8),
-                    //         border:
-                    //         Border.all(color: AppColors.bgwhiteLow2),
-                    //       ),
-                    //       child: Row(
-                    //         mainAxisAlignment:
-                    //         MainAxisAlignment.spaceEvenly,
-                    //         children: [
-                    //           Container(
-                    //             margin: const EdgeInsets.symmetric(
-                    //                 horizontal: 8),
-                    //             child: Text(
-                    //               'Đóng ứng tuyển',
-                    //               style: AppTextStyles.regular16
-                    //                   .copyWith(color: AppColors.bgWhite),
-                    //             ),
-                    //           ),
-                    //         ],
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
                   ],
                 ),
-              )
+              ),
+              itemTour.status == "IN_PROGRESS"?
+              GestureDetector(
+                onTap: () {
+                  {
+                  tourDetailsController.registerTour(TourTeamModel(
+                    teamId: authStore.idTeam,
+                    tournamentId: itemTour.id,
+                  ));
+                    showDialog(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (BuildContext context) {
+                        return AppCustomDialog(
+                          title:
+                          'Đã gửi đăng kí',
+                          confirmButton: AppDialogButton(
+                            text: 'Quay lại',
+                            onPressed: () async {
+                              Get.back();
+                            },
+                          ),
+                        );
+                      },
+                    );
+                  }
+                },
+                child: Container(
+                  margin: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
+                  decoration: BoxDecoration(
+                    color:  Colors.blueAccent ,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  height: 30.h,
+                  width: double.infinity,
+                  child: Center(
+                    child: Text(
+                      'THAM GIA GIẢI ĐẤU',
+                      style: AppTextStyles.bold16.copyWith(
+                        color:  Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ): Container(),
             ],
           ),
         ),
@@ -340,6 +280,7 @@ class _TourDetailsState extends State<TourDetails> {
     );
   }
 }
+
 _itemDetail(String lable, String name) {
   return Container(
     padding: EdgeInsets.symmetric(vertical: 8.h),

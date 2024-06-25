@@ -14,6 +14,7 @@ import '../../../core/routing/route_path.dart';
 import '../../../core/styles/app_colors.dart';
 import '../../../core/styles/app_images.dart';
 import '../../../core/styles/app_text_style.dart';
+import '../../../shared/widget/dialog/app_custom_dialog.dart';
 
 class TeamDetail extends StatefulWidget {
   const TeamDetail({super.key});
@@ -263,6 +264,22 @@ class _TeamDetailState extends State<TeamDetail> {
                       child:  GestureDetector(
                         onTap: () {
                           teamDetailController.updateStatusTeam("APPLY",itemDetail.id!);
+                          showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (BuildContext context) {
+                              return AppCustomDialog(
+                                title:
+                                'Mở đơn thành công',
+                                confirmButton: AppDialogButton(
+                                  text: 'Quay lại',
+                                  onPressed: () async {
+                                    Get.back();
+                                  },
+                                ),
+                              );
+                            },
+                          );
                         },
                         child: Container(
                           padding: EdgeInsets.symmetric(horizontal: 4.w, vertical:4.h),
@@ -298,6 +315,22 @@ class _TeamDetailState extends State<TeamDetail> {
                       child:  GestureDetector(
                         onTap: () {
                           teamDetailController.updateStatusTeam("ACTIVE",itemDetail.id!);
+                          showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (BuildContext context) {
+                              return AppCustomDialog(
+                                title:
+                                'Đóng đơn thành công',
+                                confirmButton: AppDialogButton(
+                                  text: 'Quay lại',
+                                  onPressed: () async {
+                                    Get.back();
+                                  },
+                                ),
+                              );
+                            },
+                          );
                         },
                         child: Container(
                           padding: EdgeInsets.symmetric(horizontal: 4.w, vertical:4.h),

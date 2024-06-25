@@ -18,6 +18,8 @@ class ProfileController extends GetxController {
   final authStoreService = AuthStore.to;
   late UserDetailRepository userDetailRepository;
 
+  late RxString selectedPosition = ''.obs;
+
   var userDetail = Rxn<UserModel>();
 
   @override

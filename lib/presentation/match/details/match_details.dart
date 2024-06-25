@@ -146,7 +146,7 @@ class _MatchDetailsState extends State<MatchDetails> {
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 12.w),
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20.r),
+                        borderRadius: BorderRadius.circular(12.r),
                         color: Colors.lightBlueAccent),
                     padding: EdgeInsets.symmetric(horizontal: 8.h),
                     child: Column(
@@ -159,6 +159,7 @@ class _MatchDetailsState extends State<MatchDetails> {
                           ),
                         ),
                         Container(
+                          padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
                           child: Text(
                             item.address!,
                             style: AppTextStyles.bold16
@@ -175,7 +176,7 @@ class _MatchDetailsState extends State<MatchDetails> {
                     margin:
                         EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20.r),
+                        borderRadius: BorderRadius.circular(12.r),
                         color: Colors.lightBlueAccent),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -205,7 +206,7 @@ class _MatchDetailsState extends State<MatchDetails> {
                       margin:
                       EdgeInsets.symmetric(horizontal: 12.w),
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20.r),
+                          borderRadius: BorderRadius.circular(12.r),
                           color: Colors.lightBlueAccent),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,

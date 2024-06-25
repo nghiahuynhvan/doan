@@ -17,7 +17,7 @@ class SplashController extends GetxController {
 
   void _handleStartInApp() {
     Timer(const Duration(seconds: 1), () {
-      Get.offNamed(Routers.login);
+      Get.offNamed(Routers.dashboard);
     });
   }
 }

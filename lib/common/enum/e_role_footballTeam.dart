@@ -40,13 +40,13 @@ enum ERole {
     }
   }
 
-  List<ERole> getAllRoles() {
+  static List<String> getAllRolesTile() {
     return [
-      ERole.goalkeeper,
-      ERole.defender,
-      ERole.midfielder,
-      ERole.forward,
-      ERole.free,
+      ERole.goalkeeper.title,
+      ERole.defender.title,
+      ERole.midfielder.title,
+      ERole.forward.title,
+      ERole.free.title,
     ];
   }
 }

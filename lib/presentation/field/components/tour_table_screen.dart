@@ -20,6 +20,7 @@ class TableTour extends StatefulWidget {
 
 class _TableTourState extends State<TableTour> {
   List<GroupTeamListModel> itemGroup = Get.arguments;
+
   @override
   Widget build(BuildContext context) {
     return AppBgBodyView(
@@ -37,7 +38,7 @@ class _TableTourState extends State<TableTour> {
           elevation: 0,
         ),
         body: Container(
-          child:  SingleChildScrollLoadView(
+          child: SingleChildScrollLoadView(
             child: ListView.builder(
               shrinkWrap: true,
               padding: EdgeInsets.zero,
@@ -46,7 +47,7 @@ class _TableTourState extends State<TableTour> {
               itemBuilder: (context, index) {
                 var item = itemGroup[index];
                 return GestureDetector(
-                  onTap: () async{
+                  onTap: () async {
                     // await applicationController.getUserDetails(item.member!.id);
                     // Get.to(InforMemberTeam(),arguments: item);
                     Get.to(TourTableDetails(), arguments: item);
@@ -62,69 +63,86 @@ class _TableTourState extends State<TableTour> {
                       ),
                       child: Column(
                         children: [
-                         Container(
-                           child:
-                           Column(children: [
-                             Text(item.groupName!,style: AppTextStyles.bold16.copyWith(color: Colors.white),),
-                             ListView.builder(
-                               shrinkWrap: true,
-                               padding: EdgeInsets.zero,
-                               itemCount: item.groupTeamDTOS!.length,
-                               physics: const NeverScrollableScrollPhysics(),
-                               itemBuilder:(context, index)
-                               {
-                                 return Row(
-                                   children: [
-                                     ClipRRect(
-                                       borderRadius: BorderRadius.circular(4),
-                                       child: item.groupTeamDTOS![index].img!.isNotEmpty ||  item.groupTeamDTOS![index].img! == null
-                                           ? Container(
-                                         height: 30.h,
-                                         width: 30.h,
-                                         margin: const EdgeInsets.symmetric(
-                                             vertical: 16, horizontal: 12),
-                                         child: CircleAvatar(
-                                           radius: 40,
-                                           backgroundImage:
-                                           NetworkImage( item.groupTeamDTOS![index].img!),
-                                         ),
-                                       )
-                                           : Container(
-                                         height: 40.h,
-                                         width: 40.h,
-                                         margin: const EdgeInsets.symmetric(
-                                             vertical: 16, horizontal: 12),
-                                         child: const CircleAvatar(
-                                           radius: 40,
-                                           backgroundImage: AssetImage(
-                                               AppImages.userEmpty),
-                                         ),
-                                       ),
-                                     ),
-                                     Container(
-                                       padding:
-                                       EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.h),
-                                       child: Text(item.groupTeamDTOS![index].teamName!,style: AppTextStyles.bold13.copyWith(color: Colors.white),
-                                       maxLines: 1,
-                                       overflow: TextOverflow.ellipsis,),
-                                     )
-
-                                   ],
-                                 );
-                               },
-
-                             ),
-
-                           ],),
-                         )
+                          Container(
+                            child: Column(
+                              children: [
+                                Text(
+                                  item.groupName!,
+                                  style: AppTextStyles.bold16
+                                      .copyWith(color: Colors.white),
+                                ),
+                                ListView.builder(
+                                  shrinkWrap: true,
+                                  padding: EdgeInsets.zero,
+                                  itemCount: item.groupTeamDTOS!.length,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemBuilder: (context, index) {
+                                    return Row(
+                                      children: [
+                                        ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(4),
+                                          child: item.groupTeamDTOS![index].img!
+                                                      .isNotEmpty ||
+                                                  item.groupTeamDTOS![index]
+                                                          .img! ==
+                                                      null
+                                              ? Container(
+                                                  height: 30.h,
+                                                  width: 30.h,
+                                                  margin: const EdgeInsets
+                                                      .symmetric(
+                                                      vertical: 16,
+                                                      horizontal: 12),
+                                                  child: CircleAvatar(
+                                                    radius: 40,
+                                                    backgroundImage:
+                                                        NetworkImage(item
+                                                            .groupTeamDTOS![
+                                                                index]
+                                                            .img!),
+                                                  ),
+                                                )
+                                              : Container(
+                                                  height: 40.h,
+                                                  width: 40.h,
+                                                  margin: const EdgeInsets
+                                                      .symmetric(
+                                                      vertical: 16,
+                                                      horizontal: 12),
+                                                  child: const CircleAvatar(
+                                                    radius: 40,
+                                                    backgroundImage: AssetImage(
+                                                        AppImages.userEmpty),
+                                                  ),
+                                                ),
+                                        ),
+                                        Container(
+                                          width : 200.w,
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 4.w, vertical: 4.h),
+                                          child: Text(
+                                            item.groupTeamDTOS![index]
+                                                .teamName!,
+                                            style: AppTextStyles.bold13
+                                                .copyWith(color: Colors.white),
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        )
+                                      ],
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
+                          )
                         ],
-                      )
-                  ),
+                      )),
                 );
               },
             ),
-            onRefresh: () async {
-            },
+            onRefresh: () async {},
           ),
         ),
       ),

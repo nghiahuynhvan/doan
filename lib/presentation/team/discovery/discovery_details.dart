@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 import '../../../core/styles/app_colors.dart';
 import '../../../core/styles/app_text_style.dart';
 import '../../../domain/models/team/member_team_model.dart';
+import '../../../shared/widget/dialog/app_custom_dialog.dart';
 
 class DiscoveryDetail extends StatefulWidget {
   const DiscoveryDetail({super.key});
@@ -120,7 +121,24 @@ class _DiscoveryDetailState extends State<DiscoveryDetail> {
                           username: itemUser?.username,
                           email: itemUser?.email,
                           verifyEmail: true),
-                    ));
+                    ),
+                    );
+                    showDialog(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (BuildContext context) {
+                        return AppCustomDialog(
+                          title:
+                          'Đã gửi đăng kí',
+                          confirmButton: AppDialogButton(
+                            text: 'Quay lại',
+                            onPressed: () async {
+                              Get.back();
+                            },
+                          ),
+                        );
+                      },
+                    );
                   }
                   setState(() {
                     _isButtonClicked = !_isButtonClicked;

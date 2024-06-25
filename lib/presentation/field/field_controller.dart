@@ -1,4 +1,5 @@
 import 'package:footballmanager/domain/models/tournament/tour_detail_model.dart';
+import 'package:footballmanager/domain/models/tournament/tour_team_model.dart';
 import 'package:footballmanager/domain/models/tournament/tournament_model.dart';
 import 'package:get/get.dart';
 
@@ -32,6 +33,11 @@ super.onInit();
       tourDetail.value = right;
     });
   }
+  Future<void> registerTour(TourTeamModel data) async
+  {
+    final result = await _tournamentRepository.registerTour(data);
+  }
+
 
   String getTitleVn(String title) {
     switch (title) {

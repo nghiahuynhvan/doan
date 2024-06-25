@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_cupertino_datetime_picker/flutter_cupertino_datetime_picker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:footballmanager/common/enum/e_skillLevel.dart';
 import 'package:footballmanager/common/enum/e_status.dart';
 import 'package:footballmanager/common/enum/e_status_apply.dart';
 import 'package:footballmanager/domain/models/address/address_city_model.dart';
@@ -38,10 +39,12 @@ class _FormMatchesCriteriaState extends State<FormMatchesCriteria> {
   TextEditingController _timematchController = TextEditingController();
   TextEditingController _textAddressController = TextEditingController();
 
+
   @override
   Widget build(BuildContext context) {
     var itemTeamByUser = teamController.itemTeamByUser;
     String? _selectedRole;
+    String? _selectedSkillLevel;
 
     return AppBgBodyView(
       child: Scaffold(
@@ -205,6 +208,49 @@ class _FormMatchesCriteriaState extends State<FormMatchesCriteria> {
                                     activeBgColor:
                                         Colors.green.withOpacity(0.5),
                                     inactiveBorderColor: Colors.grey,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.symmetric(vertical: 8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Trình độ',
+                                  style: AppTextStyles.bold16
+                                      .copyWith(color: Colors.black),
+                                ),
+                                Container(
+                                  child: DropdownButtonFormField<String>(
+                                    value: _selectedSkillLevel,
+                                    onChanged: (String? newValue) {
+                                      setState(() {
+                                        _selectedSkillLevel = newValue;
+                                        homeController
+                                            .selectedSkillLevel
+                                            .value = _selectedSkillLevel!;
+                                      });
+                                    },
+                                    items: SkillLevel.getAllSkillLevels()
+                                        .map<DropdownMenuItem<String>>((String role) {
+                                      return DropdownMenuItem<String>(
+                                        value: role,
+                                        child: Text(role),
+                                      );
+                                    }).toList(),
+                                    decoration: const InputDecoration(
+                                      border: OutlineInputBorder(),
+                                    ),
+                                    dropdownColor: Colors.white,
+                                    iconEnabledColor: Colors.white,
+                                    iconDisabledColor: Colors.white,
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                    ),
                                   ),
                                 ),
                               ],
@@ -457,7 +503,8 @@ class _FormMatchesCriteriaState extends State<FormMatchesCriteria> {
                             ),
                             child: TextButton(
                               onPressed: () {
-                          print('#######${homeController.selectedDistrict.value!.name}');
+
+                          print('#######${homeController.selectedSkillLevel.value}');
                                 var item = itemTeamByUser
                                     .value![homeController.index.value];
                                 homeController.createMatchesCriteria(
@@ -488,13 +535,13 @@ class _FormMatchesCriteriaState extends State<FormMatchesCriteria> {
                                               city: homeController.selectedCity.value!.name),
                                         ],
                                         skillLevelList: [
-                                          'BEGINNER',
+                                          homeController.selectedSkillLevel.value,
                                         ],
                                         courtTypeList: homeController
                                             .allCourTypesPicker.value,
                                         expiryTime:
                                             homeController.endTime.value,
-                                        description: 'abc',
+                                        description: _descriptionController.text,
                                         status: EStatusApply.pending,
                                         timeMatch: int.parse(
                                             _timematchController.text),

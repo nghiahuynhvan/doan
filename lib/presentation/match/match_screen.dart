@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:footballmanager/presentation/match/details/match_details.dart';
 import 'package:footballmanager/presentation/match/match_controller.dart';
 import 'package:footballmanager/presentation/team/team_controller.dart';
@@ -67,7 +68,7 @@ class _MatchPageState extends State<MatchPage> {
                             ? Container(
                                 margin: const EdgeInsets.symmetric(
                                     horizontal: 16, vertical: 8),
-                                padding: const EdgeInsets.only(bottom: 8),
+                                padding:  EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
                                 decoration: BoxDecoration(
                                   color: AppColors.bgWhiteLow1,
                                   borderRadius: BorderRadius.circular(8),
@@ -75,6 +76,7 @@ class _MatchPageState extends State<MatchPage> {
                                       Border.all(color: AppColors.bgwhiteLow2),
                                 ),
                                 child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [

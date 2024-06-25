@@ -11,11 +11,13 @@ import 'package:footballmanager/domain/models/team/team_by_user_model.dart';
 import 'package:footballmanager/domain/serviceable/auth_serviceable.dart';
 import 'package:footballmanager/presentation/home/details/matches_criteria_detail_controller.dart';
 import 'package:footballmanager/presentation/home/home_controller.dart';
+import 'package:footballmanager/presentation/match/match_screen.dart';
 import 'package:get/get.dart';
 
 import '../../../common/enum/e_type_court.dart';
 import '../../../core/styles/app_colors.dart';
 import '../../../core/styles/app_text_style.dart';
+import '../../../shared/widget/dialog/app_custom_dialog.dart';
 import '../../team/team_controller.dart';
 
 class MatchesCriteriaDetail extends StatefulWidget {
@@ -398,7 +400,22 @@ class _MatchesCriteriaDetailState extends State<MatchesCriteriaDetail> {
                                         .selectedAddress.value,
                                     matchCriterialId: itemDetail.id),
                               );
-                              Get.back();
+                              showDialog(
+                                context: context,
+                                barrierDismissible: false,
+                                builder: (BuildContext context) {
+                                  return AppCustomDialog(
+                                    title:
+                                    'Đã ghép đội ',
+                                    confirmButton: AppDialogButton(
+                                      text: 'Chuyển',
+                                      onPressed: () async {
+                                        Get.back();
+                                      },
+                                    ),
+                                  );
+                                },
+                              );
                             },
                             style: TextButton.styleFrom(
                               foregroundColor: Colors.white,
