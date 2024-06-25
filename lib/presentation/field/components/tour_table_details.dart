@@ -46,9 +46,9 @@ class _TourTableDetailsState extends State<TourTableDetails> {
 
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Container(child: Text('Tên đội   bóng',style: AppTextStyles.bold13.copyWith(color: Colors.white),),width: 100.w,),
+                    Container(child: Text('Đội bóng',style: AppTextStyles.bold13.copyWith(color: Colors.white),),width: 100.w,),
                     Text('Trận',style: AppTextStyles.bold13.copyWith(color: Colors.white),),
                     Text('thắng',style: AppTextStyles.bold13.copyWith(color: Colors.white),),
                     Text('thua',style: AppTextStyles.bold13.copyWith(color: Colors.white),),

@@ -60,7 +60,6 @@ class _FormMatchesCriteriaState extends State<FormMatchesCriteria> {
               children: [
                 Container(
                     width: MediaQuery.of(context).size.width,
-                    height: 50.h,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(16.0),
@@ -68,19 +67,27 @@ class _FormMatchesCriteriaState extends State<FormMatchesCriteria> {
                       ),
                       color: Colors.lightBlueAccent,
                     ),
-                    child: Column(
-                      children: [
-                        Text(
-                          'Tạo trận đấu cho sảnh chờ',
-                          style: AppTextStyles.bold19
-                              .copyWith(color: Colors.black),
-                        ),
-                        Text(
-                          'Vui lòng nhập đầy đủ các thông tin yêu cầu',
-                          style: AppTextStyles.regular13
-                              .copyWith(color: Colors.black),
-                        )
-                      ],
+                    child: Container(
+                      padding:
+                      EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.h),
+                      child: Column(
+                        children: [
+                          Text(
+                            'Tạo trận đấu cho sảnh chờ',
+                            style: AppTextStyles.bold19
+                                .copyWith(color: Colors.black),
+                          ),
+                          Container(
+                            padding:
+                            EdgeInsets.symmetric( vertical: 4.h),
+                            child: Text(
+                              'Vui lòng nhập đầy đủ các thông tin yêu cầu',
+                              style: AppTextStyles.regular13
+                                  .copyWith(color: Colors.black),
+                            ),
+                          )
+                        ],
+                      ),
                     )),
                 Expanded(
                   child: SingleChildScrollView(

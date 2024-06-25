@@ -112,8 +112,7 @@ class _TourDetailsState extends State<TourDetails> {
                 child: Row(
                   children: [
                     Container(
-                      height: 32.h,
-                      width: 120.w,
+
                       margin: const EdgeInsets.symmetric(
                           horizontal: 16, vertical: 16),
                       child:  GestureDetector(
@@ -122,8 +121,8 @@ class _TourDetailsState extends State<TourDetails> {
                        Get.to(TourTeam(), arguments: itemTeamTour)
                         },
                         child: Container(
-                          width: 100.w,
-                          height: 30.h,
+                          padding:
+                          EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.h),
                           decoration: BoxDecoration(
                             color: AppColors.bgWhiteLow1,
                             borderRadius: BorderRadius.circular(8),
@@ -150,8 +149,7 @@ class _TourDetailsState extends State<TourDetails> {
                       ),
                     ),
                     Container(
-                      height: 32.h,
-                      width: 120.w,
+
                       margin: const EdgeInsets.symmetric(
                           horizontal: 16, vertical: 16),
                       child:  GestureDetector(
@@ -161,8 +159,8 @@ class _TourDetailsState extends State<TourDetails> {
 
                         },
                         child: Container(
-                          width: 100.w,
-                          height: 30.h,
+                          padding:
+                          EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.h),
                           decoration: BoxDecoration(
                             color: AppColors.bgWhiteLow1,
                             borderRadius: BorderRadius.circular(8),
@@ -189,8 +187,7 @@ class _TourDetailsState extends State<TourDetails> {
                       ),
                     ),
                     Container(
-                      height: 32.h,
-                      width: 120.w,
+
                       margin: const EdgeInsets.symmetric(
                           horizontal: 16, vertical: 16),
                       child:  GestureDetector(
@@ -199,8 +196,8 @@ class _TourDetailsState extends State<TourDetails> {
                           Get.to(TableTour(),arguments: itemTable);
                         },
                         child: Container(
-                          width: 100.w,
-                          height: 30.h,
+                          padding:
+                          EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.h),
                           decoration: BoxDecoration(
                             color: AppColors.bgWhiteLow1,
                             borderRadius: BorderRadius.circular(8),
@@ -345,7 +342,7 @@ class _TourDetailsState extends State<TourDetails> {
 }
 _itemDetail(String lable, String name) {
   return Container(
-    padding: EdgeInsets.symmetric(vertical: 8),
+    padding: EdgeInsets.symmetric(vertical: 8.h),
     decoration: BoxDecoration(
       border: Border(
         bottom: BorderSide(
@@ -359,14 +356,14 @@ _itemDetail(String lable, String name) {
       children: [
         Text(
           lable,
-          style: AppTextStyles.regular18.copyWith(color: Colors.white),
+          style: AppTextStyles.regular14.copyWith(color: Colors.white),
         ),
         const Spacer(flex: 1),
         Expanded(
           child: Align(
             alignment: Alignment.bottomRight,
             child: Text(name,
-                style: AppTextStyles.regular18.copyWith(color: Colors.white),
+                style: AppTextStyles.regular14.copyWith(color: Colors.white),
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis),
           ),

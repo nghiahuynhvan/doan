@@ -65,18 +65,20 @@ class _MatchesCriteriaDetailState extends State<MatchesCriteriaDetail> {
             children: [
               Container(
                   color: Colors.white,
-                  height: 100.h,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
+                        padding: EdgeInsets.symmetric(vertical: 4.h,horizontal: 2.w),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(12),
                           child: itemDetail.team!.urlImage != null
                               ? Image.network(
                                   itemDetail.team!.urlImage!,
                                   fit: BoxFit.cover,
+                            height: 100.h,
+                            width: 100.w,
                                 )
                               : Image.asset(AppImages.userEmpty),
                         ),
@@ -106,7 +108,8 @@ class _MatchesCriteriaDetailState extends State<MatchesCriteriaDetail> {
                             ),
                           ),
                           Container(
-                            width: 130.w,
+                            width: 200.w,
+                            padding: EdgeInsets.symmetric(vertical: 4.h,horizontal: 2.w),
                             child: Text(
                               itemDetail.team!.playingStyle!,
                               style: AppTextStyles.bold16.copyWith(

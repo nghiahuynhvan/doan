@@ -41,7 +41,6 @@ class _MatchDetailsState extends State<MatchDetails> {
           children: [
             Container(
                 margin: EdgeInsets.only(bottom: 16.h),
-                height: 220.h,
                 decoration: BoxDecoration(
                     color: Colors.blue,
                     borderRadius: BorderRadius.only(
@@ -50,9 +49,10 @@ class _MatchDetailsState extends State<MatchDetails> {
                     )),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      margin: EdgeInsets.symmetric(horizontal: 12.w),
+                      padding: EdgeInsets.symmetric(horizontal: 4.w,vertical: 4.h),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
@@ -62,10 +62,9 @@ class _MatchDetailsState extends State<MatchDetails> {
                               style: AppTextStyles.bold16
                                   .copyWith(color: Colors.white),
                             ),
-                            margin: EdgeInsets.symmetric(vertical: 8.h),
                           ),
                           Container(
-                            margin: EdgeInsets.symmetric(vertical: 8.h),
+                            padding: EdgeInsets.symmetric(horizontal: 4.w,vertical: 4.h),
                             child: CircleAvatar(
                               radius: 40.r,
                               backgroundImage:
@@ -73,10 +72,10 @@ class _MatchDetailsState extends State<MatchDetails> {
                             ),
                           ),
                           Container(
-                            width: 100.w,
+                            width: 72.w,
                             child: Text(
                               item.homeTeam!.name,
-                              style: AppTextStyles.bold19
+                              style: AppTextStyles.bold16
                                   .copyWith(color: Colors.white),
                               maxLines: 3,
                               overflow: TextOverflow.ellipsis,
@@ -91,7 +90,7 @@ class _MatchDetailsState extends State<MatchDetails> {
                         children: [
                           Text(
                             '0 - 0',
-                            style: AppTextStyles.bold32
+                            style: AppTextStyles.bold26
                                 .copyWith(color: Colors.white),
                           ),
                           Container(
@@ -105,20 +104,20 @@ class _MatchDetailsState extends State<MatchDetails> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.symmetric(horizontal: 12.w),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Container(
+                            padding: EdgeInsets.symmetric(horizontal: 4.w,vertical: 4.h),
                             child: Text(
                               'Khách',
                               style: AppTextStyles.bold16
                                   .copyWith(color: Colors.white),
                             ),
-                            margin: EdgeInsets.symmetric(vertical: 8.h),
+
                           ),
                           Container(
-                            margin: EdgeInsets.symmetric(vertical: 8.h),
+                            padding: EdgeInsets.symmetric(horizontal: 4.w,vertical: 4.h),
                             child: CircleAvatar(
                               radius: 40.r,
                               backgroundImage:
@@ -126,10 +125,11 @@ class _MatchDetailsState extends State<MatchDetails> {
                             ),
                           ),
                           Container(
-                            width: 100.w,
+
+                            width: 72.w,
                             child: Text(
                               item.awayTeam!.name,
-                              style: AppTextStyles.bold19
+                              style: AppTextStyles.bold16
                                   .copyWith(color: Colors.white),
                               maxLines: 4,
                               overflow: TextOverflow.ellipsis,
@@ -161,7 +161,7 @@ class _MatchDetailsState extends State<MatchDetails> {
                         Container(
                           child: Text(
                             item.address!,
-                            style: AppTextStyles.bold19
+                            style: AppTextStyles.bold16
                                 .copyWith(color: Colors.white),
                           ),
                         ),
@@ -169,8 +169,9 @@ class _MatchDetailsState extends State<MatchDetails> {
                     ),
                   ),
                   Container(
-                    height: 60.h,
                     width: double.infinity,
+                    padding:
+                    EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.h),
                     margin:
                         EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
                     decoration: BoxDecoration(
@@ -182,7 +183,7 @@ class _MatchDetailsState extends State<MatchDetails> {
                         Container(
                           child: Text(
                             'Thời gian thi đấu',
-                            style: AppTextStyles.bold20
+                            style: AppTextStyles.bold16
                                 .copyWith(color: Colors.white),
                           ),
                         ),
@@ -198,8 +199,9 @@ class _MatchDetailsState extends State<MatchDetails> {
                   ),
                   GestureDetector(
                     child: Container(
-                      height: 60.h,
                       width: double.infinity,
+                      padding:
+                      EdgeInsets.symmetric(horizontal: 6.w, vertical: 6.h),
                       margin:
                       EdgeInsets.symmetric(horizontal: 12.w),
                       decoration: BoxDecoration(
@@ -211,7 +213,7 @@ class _MatchDetailsState extends State<MatchDetails> {
                           Container(
                             child: Text(
                               'Thông tin đối thủ',
-                              style: AppTextStyles.bold20
+                              style: AppTextStyles.bold16
                                   .copyWith(color: Colors.white),
                             ),
                           ),

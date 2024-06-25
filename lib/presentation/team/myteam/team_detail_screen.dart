@@ -107,8 +107,7 @@ class _TeamDetailState extends State<TeamDetail> {
                   children: [
                     authStore.idUser == itemDetail.ownerId ?
                     Container(
-                      height: 32.h,
-                      width: 120.w,
+
                         margin: const EdgeInsets.symmetric(
                             horizontal: 16, vertical: 16),
                         child:  GestureDetector(
@@ -122,8 +121,7 @@ class _TeamDetailState extends State<TeamDetail> {
                             }),
                           },
                           child: Container(
-                            width: 100.w,
-                            height: 30.h,
+                           padding: EdgeInsets.symmetric(horizontal: 4.w, vertical:4.h),
                             decoration: BoxDecoration(
                               color: AppColors.bgWhiteLow1,
                               borderRadius: BorderRadius.circular(8),
@@ -150,8 +148,7 @@ class _TeamDetailState extends State<TeamDetail> {
                         ),
                     ): Container(),
                     Container(
-                      height: 32.h,
-                      width: 120.w,
+
                       margin: const EdgeInsets.symmetric(
                           horizontal: 16, vertical: 16),
                       child:  GestureDetector(
@@ -162,8 +159,8 @@ class _TeamDetailState extends State<TeamDetail> {
                               teamId: itemDetail.id!, status: 'CONFIRMED')
                         },
                         child: Container(
-                          width: 100.w,
-                          height: 30.h,
+
+                          padding: EdgeInsets.symmetric(horizontal: 4.w, vertical:4.h),
                           decoration: BoxDecoration(
                             color: AppColors.bgWhiteLow1,
                             borderRadius: BorderRadius.circular(8),
@@ -190,8 +187,7 @@ class _TeamDetailState extends State<TeamDetail> {
                       ),
                     ),
                     Container(
-                      height: 32.h,
-                      width: 160.w,
+
                       margin: const EdgeInsets.symmetric(
                           horizontal: 16, vertical: 16),
                       child:  GestureDetector(
@@ -200,8 +196,7 @@ class _TeamDetailState extends State<TeamDetail> {
                           Get.to(HistoryMatchTeam());
                         },
                         child: Container(
-                          width: 100.w,
-                          height: 30.h,
+                          padding: EdgeInsets.symmetric(horizontal: 4.w, vertical:4.h),
                           decoration: BoxDecoration(
                             color: AppColors.bgWhiteLow1,
                             borderRadius: BorderRadius.circular(8),
@@ -229,14 +224,12 @@ class _TeamDetailState extends State<TeamDetail> {
                       ),
                     ),
                     Container(
-                      height: 32.h,
-                      width: 120.w,
+
                       margin: const EdgeInsets.symmetric(
                           horizontal: 16, vertical: 16),
                       child:  GestureDetector(
                         child: Container(
-                          width: 100.w,
-                          height: 30.h,
+                          padding: EdgeInsets.symmetric(horizontal: 4.w, vertical:4.h),
                           decoration: BoxDecoration(
                             color: AppColors.bgWhiteLow1,
                             borderRadius: BorderRadius.circular(8),
@@ -264,8 +257,7 @@ class _TeamDetailState extends State<TeamDetail> {
                     ),
                     authStore.idUser == itemDetail.ownerId?
                     Container(
-                      height: 32.h,
-                      width: 120.w,
+
                       margin: const EdgeInsets.symmetric(
                           horizontal: 16, vertical: 16),
                       child:  GestureDetector(
@@ -273,8 +265,7 @@ class _TeamDetailState extends State<TeamDetail> {
                           teamDetailController.updateStatusTeam("APPLY",itemDetail.id!);
                         },
                         child: Container(
-                          width: 140.w,
-                          height: 30.h,
+                          padding: EdgeInsets.symmetric(horizontal: 4.w, vertical:4.h),
                           decoration: BoxDecoration(
                             color: AppColors.bgWhiteLow1,
                             borderRadius: BorderRadius.circular(8),
@@ -301,8 +292,7 @@ class _TeamDetailState extends State<TeamDetail> {
                     ):Container(),
                     authStore.idUser == itemDetail.ownerId ?
                     Container(
-                      height: 32.h,
-                      width: 120.w,
+
                       margin: const EdgeInsets.symmetric(
                           horizontal: 16, vertical: 16),
                       child:  GestureDetector(
@@ -310,8 +300,7 @@ class _TeamDetailState extends State<TeamDetail> {
                           teamDetailController.updateStatusTeam("ACTIVE",itemDetail.id!);
                         },
                         child: Container(
-                          width: 140.w,
-                          height: 30.h,
+                          padding: EdgeInsets.symmetric(horizontal: 4.w, vertical:4.h),
                           decoration: BoxDecoration(
                             color: AppColors.bgWhiteLow1,
                             borderRadius: BorderRadius.circular(8),

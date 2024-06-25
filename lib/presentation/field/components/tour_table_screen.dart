@@ -102,7 +102,11 @@ class _TableTourState extends State<TableTour> {
                                        ),
                                      ),
                                      Container(
-                                       child: Text(item.groupTeamDTOS![index].teamName!,style: AppTextStyles.bold13.copyWith(color: Colors.white),),
+                                       padding:
+                                       EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.h),
+                                       child: Text(item.groupTeamDTOS![index].teamName!,style: AppTextStyles.bold13.copyWith(color: Colors.white),
+                                       maxLines: 1,
+                                       overflow: TextOverflow.ellipsis,),
                                      )
 
                                    ],

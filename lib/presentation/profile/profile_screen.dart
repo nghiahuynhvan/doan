@@ -108,14 +108,16 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
               ),
-              Expanded(
+              SingleChildScrollView(
+                scrollDirection: Axis.vertical,
                 child: Container(
                     width: double.infinity,
+                    padding : EdgeInsets.symmetric(
+                        horizontal: 8.w, vertical: 8.h),
                     decoration: BoxDecoration(
                       color: AppColors.bgWhiteLow1,
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(16),
-                        topRight: Radius.circular(16),
+                      borderRadius:  BorderRadius.circular(
+                        16.r
                       ),
                     ),
                     child: Obx(
@@ -310,7 +312,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     ),
                                   },
                                   child: Container(
-                                    height: 40.h,
+
                                     width: double.infinity,
                                     margin: const EdgeInsets.only(
                                         top: 16, left: 16, right: 16),
@@ -321,6 +323,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                     child: Row(
                                       children: [
                                         Container(
+                                          padding : EdgeInsets.symmetric(
+                                              horizontal: 8.w, vertical: 8.h),
                                           margin: const EdgeInsets.symmetric(
                                               horizontal: 16),
                                           child: Text(
@@ -334,61 +338,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                     ),
                                   ),
                                 ),
-                                // GestureDetector(
-                                //   onTap: () => {
-                                //     showDialog(
-                                //       context: context,
-                                //       barrierDismissible: false,
-                                //       builder: (BuildContext context) {
-                                //         return AppCustomDialog(
-                                //           color: Colors.red,
-                                //           title:
-                                //           'Bạn có chắc chắn muốn xóa tài khoản?',
-                                //           confirmButton: AppDialogButton(
-                                //
-                                //             text: 'Xóa tài khoản',
-                                //             onPressed: () async {
-                                //              await profileController.deleteAccount();
-                                //               authStoreService.logout(
-                                //                   isGoToLogin: false);
-                                //               Get.offNamed(Routers.login);
-                                //             },
-                                //           ),
-                                //           closeButton: AppDialogButton(
-                                //             text: 'Hủy',
-                                //             onPressed: () async {
-                                //               Get.back();
-                                //             },
-                                //           ),
-                                //         );
-                                //       },
-                                //     ),
-                                //   },
-                                //   child: Container(
-                                //     height: 40.h,
-                                //     width: double.infinity,
-                                //     margin: const EdgeInsets.only(
-                                //         top: 16, left: 16, right: 16),
-                                //     decoration: BoxDecoration(
-                                //       borderRadius: BorderRadius.circular(8),
-                                //       color: AppColors.bgWhite.withOpacity(0.1),
-                                //     ),
-                                //     child: Row(
-                                //       children: [
-                                //         Container(
-                                //           margin: const EdgeInsets.symmetric(
-                                //               horizontal: 16),
-                                //           child: Text(
-                                //             'Xóa tài khoản',
-                                //             style: AppTextStyles.regular18
-                                //                 .copyWith(
-                                //                 color: AppColors.bgWhite),
-                                //           ),
-                                //         ),
-                                //       ],
-                                //     ),
-                                //   ),
-                                // ),
 
                               ],
                             )
