@@ -20,6 +20,7 @@ class TeamPage extends StatefulWidget {
 class _TeamPageState extends State<TeamPage> {
   TeamController teamController = TeamController.to;
 
+
   @override
   Widget build(BuildContext context) {
     return AppBgBodyView(
@@ -36,7 +37,7 @@ class _TeamPageState extends State<TeamPage> {
           backgroundColor: AppColors.appbarWhiteLow,
           elevation: 0,
         ),
-        body: Column(
+        body: Obx(()=> teamController.authStoreService.isLogged ==true ?Column(
           children: [
             Container(
               color: AppColors.appbarWhiteLow,
@@ -59,9 +60,9 @@ class _TeamPageState extends State<TeamPage> {
                   ),
                 ),
                 labelStyle:
-                    AppTextStyles.bold18.copyWith(color: AppColors.bgWhite),
+                AppTextStyles.bold18.copyWith(color: AppColors.bgWhite),
                 unselectedLabelStyle:
-                    AppTextStyles.bold16.copyWith(color: AppColors.bgWhite),
+                AppTextStyles.bold16.copyWith(color: AppColors.bgWhite),
               ),
             ),
             Expanded(
@@ -74,7 +75,7 @@ class _TeamPageState extends State<TeamPage> {
               ),
             ),
           ],
-        ),
+        ): Container(),),
       ),
     );
   }

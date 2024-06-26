@@ -51,7 +51,6 @@ class LoginController extends GetxController {
     if (userInfor.value != '') {
       Get.offNamed(Routers.dashboard);
       storage.setString(PrefsConstants.idUser, userInfor.value!.id);
-      authStore.isLogged.value = true;
       AuthStore.to.getAccessToken();
     }
   }

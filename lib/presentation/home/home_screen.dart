@@ -7,6 +7,7 @@ import 'package:footballmanager/app.dart';
 import 'package:footballmanager/common/constants/app_constants.dart';
 import 'package:footballmanager/common/enum/e_status_apply.dart';
 import 'package:footballmanager/common/extensions/context_extensions/bottom_sheet_extensions.dart';
+import 'package:footballmanager/domain/serviceable/auth_serviceable.dart';
 import 'package:footballmanager/presentation/home/components/custom_form.dart';
 import 'package:footballmanager/presentation/home/components/custom_location.dart';
 import 'package:footballmanager/presentation/home/components/custom_situation.dart';
@@ -19,6 +20,7 @@ import '../../core/styles/app_colors.dart';
 import '../../core/styles/app_images.dart';
 import '../../core/styles/app_text_style.dart';
 import '../../shared/widget/app_bg_body_view.dart';
+import '../../shared/widget/dialog/app_custom_dialog.dart';
 import '../../shared/widget/scroll_view/single_chill_scroll_load_more_widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -360,7 +362,29 @@ class _HomePageState extends State<HomePage> {
                             height: 50.h,
                             child: ElevatedButton(
                               onPressed: () {
-                                Get.to(FormMatchesCriteria());
+                                homeController.authStore.isLogged == true ?
+                                Get.to(FormMatchesCriteria()) :
+                                showDialog(
+                                  context: context,
+                                  barrierDismissible: false,
+                                  builder: (BuildContext context) {
+                                    return AppCustomDialog(
+                                      title: 'Bạn chưa đăng nhập',
+                                      confirmButton: AppDialogButton(
+                                        text: 'Đăng nhập',
+                                        onPressed: () async {
+                                          Get.toNamed(Routers.login);
+                                        },
+                                      ),
+                                      closeButton: AppDialogButton(
+                                      text: 'Quay lại',
+                                    onPressed: () async {
+                                    Get.back();
+                                    },
+                                      )
+                                    );
+                                  },
+                                );
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: AppColors.buttonBlue,

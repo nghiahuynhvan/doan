@@ -44,7 +44,7 @@ class _MatchPageState extends State<MatchPage> {
         elevation: 0,
       ),
       body: Obx(
-        () => matchController.itemMatchesByTeam.value != null
+        () => matchController.itemMatchesByTeam.value != null && matchController.authStore.isLogged ==true
             ? Container(
                 margin: const EdgeInsets.symmetric(vertical: 8),
                 child: SingleChildScrollLoadView(

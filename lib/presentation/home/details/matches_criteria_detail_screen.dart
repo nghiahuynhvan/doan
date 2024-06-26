@@ -32,6 +32,7 @@ class _MatchesCriteriaDetailState extends State<MatchesCriteriaDetail> {
       MatchesCriteriaDetailController.to;
   HomeController homeController = HomeController.to;
   TeamController teamController = TeamController.to;
+  final authStore = AuthStore.to;
 
   @override
   Widget build(BuildContext context) {
@@ -360,7 +361,7 @@ class _MatchesCriteriaDetailState extends State<MatchesCriteriaDetail> {
                          ),
                        ),
                         itemDetail.team?.ownerId
-                            != authStore.idUser ?
+                            != authStore.idUser && authStore.isLogged == true ?
                         itemDetail.status?.title == "PENDING" ?
                         Container(
                           margin: EdgeInsets.symmetric(
