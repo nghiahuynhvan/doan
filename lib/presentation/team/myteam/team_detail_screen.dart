@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:footballmanager/core/styles/app_common_title.dart';
 import 'package:footballmanager/domain/serviceable/auth_serviceable.dart';
 import 'package:footballmanager/presentation/team/components/history_match_team.dart';
 import 'package:footballmanager/presentation/team/components/member_team.dart';
@@ -90,10 +91,9 @@ class _TeamDetailState extends State<TeamDetail> {
                               ],
                             ),
                           ),
-                          _itemDetail('Người liên hệ', '-'),
                           _itemDetail(
                               'Số điên thoại', itemDetail.contactInformation??"-"),
-                          _itemDetail('Trình độ', itemDetail.skill??"-"),
+                          _itemDetail('Trình độ', AppCommonTitle().titleSkill(itemDetail.skill)??"-"),
                           _itemDetail('Danh hiệu', itemDetail.achievements??"-"),
                           _itemDetail('Mô tả', itemDetail.description??"-"),
                         ],

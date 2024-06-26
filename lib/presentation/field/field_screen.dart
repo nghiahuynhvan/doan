@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:footballmanager/core/styles/app_common_title.dart';
 import 'package:footballmanager/presentation/field/field_controller.dart';
 import 'package:footballmanager/presentation/field/item_tour_detail.dart';
 import 'package:get/get.dart';
@@ -327,7 +328,7 @@ class _FieldPageState extends State<FieldPage> {
                                                                       .bgWhite),
                                                         ),
                                                         Text(
-                                                          itemTournament.type!,
+                                                          AppCommonTitle().getForm(itemTournament.type!),
                                                           maxLines: 1,
                                                           overflow: TextOverflow
                                                               .ellipsis,

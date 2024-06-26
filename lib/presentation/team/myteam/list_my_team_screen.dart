@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:footballmanager/core/styles/app_colors.dart';
+import 'package:footballmanager/core/styles/app_common_title.dart';
 import 'package:footballmanager/core/styles/app_images.dart';
 import 'package:footballmanager/core/styles/app_text_style.dart';
 import 'package:footballmanager/presentation/home/home_controller.dart';
@@ -189,7 +190,7 @@ class _MyTeamScreenState extends State<MyTeamScreen> {
                                           margin: const EdgeInsets.symmetric(
                                               horizontal: 16, vertical: 4),
                                           child: Text(
-                                            item.skill,
+                                            AppCommonTitle().titleSkill(item.skill),
                                             style: AppTextStyles.bold13.copyWith(
                                                 color: AppColors.bgWhiteLow5),
                                           ),
@@ -201,7 +202,7 @@ class _MyTeamScreenState extends State<MyTeamScreen> {
                                             text: TextSpan(
                                               children: [
                                                 TextSpan(
-                                                  text: item.statusTeam,
+                                                  text: AppCommonTitle().getStatusTitle(item.statusTeam),
                                                   style: AppTextStyles.regular11
                                                       .copyWith(
                                                           color: AppColors

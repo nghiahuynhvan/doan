@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:footballmanager/core/styles/app_common_title.dart';
 import 'package:footballmanager/presentation/team/team_controller.dart';
 import 'package:footballmanager/shared/widget/app_bg_body_view.dart';
 import 'package:footballmanager/shared/widget/scroll_view/single_chill_scroll_load_more_widget.dart';
@@ -88,7 +89,7 @@ class _DiscoveryScreenState extends State<DiscoveryScreen> {
                             margin: const EdgeInsets.symmetric(
                                 horizontal: 16, vertical: 4),
                             child: Text(
-                              itemActiveTeam.skill,
+                              AppCommonTitle().titleSkill(itemActiveTeam.skill),
                               style: AppTextStyles.bold13
                                   .copyWith(color: AppColors.bgWhiteLow5),
                             ),
@@ -100,7 +101,7 @@ class _DiscoveryScreenState extends State<DiscoveryScreen> {
                               text: TextSpan(
                                 children: [
                                   TextSpan(
-                                    text: itemActiveTeam.statusTeam,
+                                    text:  AppCommonTitle().getStatusTitle(itemActiveTeam.statusTeam),
                                     style: AppTextStyles.regular11
                                         .copyWith(color: AppColors.bgWhite),
                                   ),

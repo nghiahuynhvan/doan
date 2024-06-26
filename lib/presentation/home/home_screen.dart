@@ -306,10 +306,10 @@ class _HomePageState extends State<HomePage> {
                                                         Row(
                                                           children: [
                                                             Text(
-                                                              itemTeamMatchCriteria
-                                                                  .team!
-                                                                  .skillLevel!
-                                                                  .title,
+                                                             homeController.titleSkill(itemTeamMatchCriteria
+                                                                 .team!
+                                                                 .skillLevel!
+                                                                 .title) ,
                                                               style: AppTextStyles
                                                                   .regular14
                                                                   .copyWith(

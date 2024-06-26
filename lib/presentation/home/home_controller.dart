@@ -159,4 +159,31 @@ class HomeController extends GetxController {
     }
         }
 
+  String  titleSkill (String title) {
+    switch (title) {
+      case "BEGINNER":
+        return "MỚI BẮT ĐẦU";
+      case "NOVICE":
+        return "TIRO";
+      case "RECREATIONAL":
+        return "NGHIỆP DƯ";
+      case "BASIC":
+        return "CƠ BẢN";
+      case "INTERMEDIATE":
+        return "TRUNG BÌNH";
+      case "ABOVE_AVERAGE":
+        return "TRÊN TRUNG BÌNH";
+      case "AMATEUR":
+        return "NGHIỆP DƯ";
+      case "SEMI_PROFESSIONAL":
+        return "BÁN CHUYÊN NGHIỆP";
+      case "PROFESSIONAL":
+        return "CHUYÊN NGHIỆP";
+      case "INTERNATIONAL":
+        return "QUỐC TẾ";
+      default:
+        throw Exception("Invalid title in Vietnamese: $title");
+    }
+  }
+
 }

@@ -9,6 +9,7 @@ import 'package:footballmanager/presentation/field/field_controller.dart';
 import 'package:get/get.dart';
 
 import '../../core/styles/app_colors.dart';
+import '../../core/styles/app_common_title.dart';
 import '../../core/styles/app_images.dart';
 import '../../core/styles/app_text_style.dart';
 import '../../domain/models/tournament/tour_team_model.dart';
@@ -94,13 +95,13 @@ class _TourDetailsState extends State<TourDetails> {
                               ],
                             ),
                           ),
-                          _itemDetail('Hình thức', itemTour.type ?? "-"),
+                          _itemDetail('Hình thức',  AppCommonTitle().getForm(itemTour.type!) ?? "-"),
                           _itemDetail(
                               'Ban tổ chức', itemTour.personContact ?? "-"),
                           _itemDetail('Địa điểm', itemTour.address ?? "-"),
                           _itemDetail(
                               'Số điện thoại', itemTour.phoneContact ?? "-"),
-                          _itemDetail('Trình độ', itemTour.levelRequire ?? "-"),
+                          _itemDetail('Trình độ',AppCommonTitle().titleSkill(itemTour.levelRequire!)  ?? "-"),
                           _itemDetail('Bắt đầu', itemTour.startTime ?? "-"),
                           _itemDetail('Kết thúc', itemTour.endTime ?? "-"),
                         ],
