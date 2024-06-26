@@ -15,6 +15,7 @@ import 'package:footballmanager/presentation/field/field_screen.dart';
 import 'package:footballmanager/presentation/home/details/matches_criteria_detail_screen.dart';
 import 'package:footballmanager/presentation/home/home_screen.dart';
 import 'package:footballmanager/presentation/login/login_screen.dart';
+import 'package:footballmanager/presentation/match/match_all_screen.dart';
 import 'package:footballmanager/presentation/match/match_screen.dart';
 import 'package:footballmanager/presentation/profile/profile_screen.dart';
 import 'package:footballmanager/presentation/splash_screen/splash_screen.dart';
@@ -78,7 +79,7 @@ class AppPages {
     ),
     GetPage(
       name: Routers.match,
-      page: () => const MatchPage(),
+      page: () => const MatchAllScreen(),
       binding: MatchBinding(),
     ),
     GetPage(

@@ -31,18 +31,6 @@ class _MatchPageState extends State<MatchPage> {
   Widget build(BuildContext context) {
     return AppBgBodyView(
         child: Scaffold(
-      appBar: AppBar(
-        title: Align(
-          alignment: Alignment.center,
-          child: Text(
-            'Lịch Đấu',
-            style: AppTextStyles.bold19.copyWith(color: AppColors.bgWhite),
-          ),
-        ),
-        systemOverlayStyle: SystemUiOverlayStyle.light,
-        backgroundColor: AppColors.appbarWhiteLow,
-        elevation: 0,
-      ),
       body: Obx(
         () => matchController.itemMatchesByTeam.value != null && matchController.authStore.isLogged ==true
             ? Container(

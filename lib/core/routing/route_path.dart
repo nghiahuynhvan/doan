@@ -6,6 +6,7 @@ class Routers {
   static const dashboard = '/dashboard';
   static const home = '/home';
   static const team = '/team';
+  static const matchall = 'teamall';
   static const match = '/match';
   static const profile = '/profile';
   static const field = '/field';

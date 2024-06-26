@@ -12,6 +12,7 @@ import '../../models/home/matches_criteria_model.dart';
 abstract class ListMatchesByTeamRepository extends Repository {
 
   Future<Either<AppError, List<MatchModel>>> getMachesByTeam({required String teamId});
+  Future<Either<AppError, List<MatchModel>>> getMachesAll();
 }
 
 /// {@macro authentication_repository}
@@ -30,6 +31,21 @@ class ListMatchesByTeamRepositoryImpl extends ListMatchesByTeamRepository {
       List<dynamic> data = response;
       final result = data.map((e) => MatchModel.fromJson(e)).toList();
       print('@@@@@@@@@@@${result}');
+      return Right(result);
+    } on DioError catch (e) {
+      return LeftAPI(e);
+    }
+  }
+  @override
+  Future<Either<AppError, List<MatchModel>>> getMachesAll() async {
+    try {
+      final url = "https://soccermatch-production.up.railway.app/api/matches";
+
+      final response =
+      await _apiClient.get(url);
+      List<dynamic> data = response;
+      final result = data.map((e) => MatchModel.fromJson(e)).toList();
+      print('@#######${result}');
       return Right(result);
     } on DioError catch (e) {
       return LeftAPI(e);

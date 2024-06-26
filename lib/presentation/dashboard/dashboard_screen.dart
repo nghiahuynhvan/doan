@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:footballmanager/presentation/dashboard/dashboard_controller.dart';
 import 'package:footballmanager/presentation/field/field_screen.dart';
+import 'package:footballmanager/presentation/match/match_all_screen.dart';
 import 'package:footballmanager/presentation/match/match_controller.dart';
 import 'package:footballmanager/presentation/match/match_screen.dart';
 import 'package:footballmanager/presentation/profile/profile_screen.dart';
@@ -61,8 +62,8 @@ class _MyDashBoardState extends State<MyDashBoard> {
               onTap: (index) async {
                 if(index == 2)
                   {
-                    matchController.getMatchesByTeam();
-                    Get.to(MatchPage(), routeName: Routers.match);
+                      matchController.getMatchesAll();
+                    Get.to(MatchAllScreen(), routeName: Routers.matchall);
                   }
                 else
                   {
