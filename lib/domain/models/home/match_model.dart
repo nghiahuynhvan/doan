@@ -11,7 +11,7 @@ class   MatchModel {
   String? typeCourt;
   String? skillLevel;
   String? address;
-  String? matchCriterialId;
+  String? matchCriteriaId;
 
   MatchModel({
     this.id,
@@ -24,7 +24,7 @@ class   MatchModel {
     this.typeCourt,
     this.skillLevel,
     this.address,
-    this.matchCriterialId,
+    this.matchCriteriaId,
 });
 
   factory MatchModel.fromJson(Map<String, dynamic> json) {
@@ -43,7 +43,7 @@ class   MatchModel {
       typeCourt: json['typeCourt'] as String?,
       skillLevel: json['skillLevel'] as String?,
       address: json['address'] as String?,
-      matchCriterialId: json['matchCriterialId'] as String?,
+      matchCriteriaId: json['matchCriteriaId'] as String?,
     );
   }
 
@@ -59,7 +59,7 @@ class   MatchModel {
       'typeCourt': typeCourt,
       'skillLevel': skillLevel,
       'address': address,
-      'matchCriterialId': matchCriterialId,
+      'matchCriteriaId': matchCriteriaId,
     };
   }
 

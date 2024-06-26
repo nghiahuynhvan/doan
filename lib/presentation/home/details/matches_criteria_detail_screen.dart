@@ -398,7 +398,7 @@ class _MatchesCriteriaDetailState extends State<MatchesCriteriaDetail> {
                                         .selectedSkillLevel.value,
                                     address: matchesCriteriaDetailController
                                         .selectedAddress.value,
-                                    matchCriterialId: itemDetail.id),
+                                    matchCriteriaId: itemDetail.id),
                               );
                               showDialog(
                                 context: context,
