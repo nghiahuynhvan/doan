@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:footballmanager/common/enum/e_status.dart';
 import 'package:footballmanager/common/enum/e_status_apply.dart';
+import 'package:footballmanager/core/styles/app_common_title.dart';
 import 'package:footballmanager/domain/models/team/member_team_model.dart';
 import 'package:footballmanager/presentation/team/myteam/team_detail_controller.dart';
 import 'package:footballmanager/shared/widget/app_bg_body_view.dart';
@@ -87,7 +88,7 @@ class _ApplicationScreenState extends State<ApplicationScreen> {
                                   margin: const EdgeInsets.symmetric(
                                       horizontal: 16, vertical: 4),
                                   child: Text(
-                                    item.member!.fullName!,
+                                    item.member!.phoneNumber ?? "Chưa cập nhật số điện thoại",
                                     style: AppTextStyles.bold13
                                         .copyWith(color: AppColors.bgWhiteLow6),
                                   ),
@@ -99,7 +100,7 @@ class _ApplicationScreenState extends State<ApplicationScreen> {
                                     text: TextSpan(
                                       children: [
                                         TextSpan(
-                                          text: item.member!.favoritePosition,
+                                          text: "Vị trí:   "+ AppCommonTitle().titlePosition(item.member!.favoritePosition ?? "") ,
                                           style: AppTextStyles.regular13
                                               .copyWith(
                                                   color: AppColors.bgWhite),

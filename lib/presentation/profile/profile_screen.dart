@@ -348,7 +348,7 @@ class _ProfilePageState extends State<ProfilePage> {
         ],
       ): GestureDetector(
         onTap: (){
-          Get.toNamed(Routers.login);
+          Get.offNamed(Routers.login);
         },
         child: Container(
 

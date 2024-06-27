@@ -95,7 +95,7 @@ class _DiscoveryDetailState extends State<DiscoveryDetail> {
                   ],
                 ),
               ),
-              authStore.idTeam != "" ?
+              authStore.idTeam == "" ?
               GestureDetector(
                 onTap: () {
                   {

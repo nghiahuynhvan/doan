@@ -106,50 +106,7 @@ class _HomePageState extends State<HomePage> {
                                       )
                                     },
                                   );
-                                })),
-                            Container(
-
-                                margin: const EdgeInsets.symmetric(
-                                    horizontal: 8, vertical: 16),
-                                child: Obx(() {
-                                  return GestureDetector(
-                                    child: Container(
-                                      padding:  EdgeInsets.symmetric(horizontal: 4, vertical:4 ),
-
-                                      decoration: BoxDecoration(
-                                        color: AppColors.bgWhiteLow1,
-                                        borderRadius: BorderRadius.circular(8),
-                                        border: Border.all(
-                                            color: AppColors.bgwhiteLow2),
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Container(
-                                            padding:  EdgeInsets.symmetric(horizontal: 4, vertical:4 ),
-                                            child: Text(
-                                              homeController.form.value,
-                                              style: AppTextStyles.regular16
-                                                  .copyWith(
-                                                      color: AppColors.bgWhite),
-                                            ),
-                                          ),
-                                          Icon(
-                                            Icons.arrow_drop_down,
-                                            color: AppColors.bgWhite,
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                    onTap: () => {
-                                      context.showAppBottomSheet(
-                                        child: CustomForm(),
-                                        isDismissible: false,
-                                      )
-                                    },
-                                  );
-                                })),
+                                }),),
                             Container(
                                 margin: const EdgeInsets.symmetric(
                                     horizontal: 8, vertical: 8),
@@ -373,7 +330,7 @@ class _HomePageState extends State<HomePage> {
                                       confirmButton: AppDialogButton(
                                         text: 'Đăng nhập',
                                         onPressed: () async {
-                                          Get.toNamed(Routers.login);
+                                          Get.offNamed(Routers.login);
                                         },
                                       ),
                                       closeButton: AppDialogButton(

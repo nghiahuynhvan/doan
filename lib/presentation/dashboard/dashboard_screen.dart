@@ -61,7 +61,7 @@ class _MyDashBoardState extends State<MyDashBoard> {
               unselectedLabelStyle: AppTextStyles.regular11,
               onTap: (index) async {
                 if(index == 2)
-                  {
+                  {  await matchController.getMatchesByTeam();
                       matchController.getMatchesAll();
                     Get.to(MatchAllScreen(), routeName: Routers.matchall);
                   }

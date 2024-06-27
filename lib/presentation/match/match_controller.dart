@@ -20,7 +20,7 @@ class MatchController extends GetxController with GetSingleTickerProviderStateMi
 
   @override
   void onInit() {
-    getMatchesByTeam();
+
     tabController1 = TabController(length: 2, vsync: this);
     super.onInit();
 

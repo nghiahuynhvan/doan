@@ -65,4 +65,23 @@ class AppCommonTitle {
         return title;
     }
   }
+
+  String  titlePosition(String title) {
+    switch (title) {
+      case "GOALKEEPER":
+        return 'THỦ MÔN';
+      case "DEFENDER":
+        return 'HẬU VỆ';
+      case "MIDFIELDER":
+        return 'TIỀN VỆ';
+      case "FORWARD":
+        return 'TIỀN ĐẠO';
+      case "FREE":
+        return 'TỰ DO';
+      case "":
+        return 'TỰ DO';
+      default:
+        throw Exception('Vai trò không hợp lệ');
+    }
+  }
 }
